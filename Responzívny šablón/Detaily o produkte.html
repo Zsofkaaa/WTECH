@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detaily o produkte</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            background: #d8b8eb;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-bar {
+            padding: 5px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: white;
+            padding: 10px;
+        }
+        .nav button {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .product-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .product-left, .product-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+        .product-left {
+            justify-content: center;
+        }
+        .product-right {
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+        .product-image {
+            width: 300px;
+            height: 300px;
+            background: gray;
+            flex-shrink: 0;
+        }
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .product-description {
+            margin-top: 20px;
+            background: lightgray;
+            padding: 15px;
+            border-radius: 5px;
+            min-height: 300px;
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-bottom: 40px;
+        }
+        .footer {
+            background: #ccc;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="header">
+        <span>LOGO</span>
+        <input type="text" class="search-bar" placeholder="Zadajte, čo hľadáte...">
+        <div>
+            <button>❤️</button>
+            <button>🛒</button>
+        </div>
+    </div>
+    <nav class="nav">
+        <button>🏠</button>
+        <button>Na predaj</button>
+        <button>Novinky</button>
+        <button>Shop</button>
+        <button>Best sellers</button>
+    </nav>
+    <div class="product-container">
+        <!-- Bal oldali rész, ahol a kép van -->
+        <div class="product-left">
+            <div class="product-image"></div>
+        </div>
+        <!-- Jobb oldali rész, ahol a szövegek lesznek -->
+        <div class="product-right">
+            <h2>Meno</h2>
+            <p>Cena</p>
+            <button style="background:black; color:white; padding:10px;">Pridať do košíka</button>
+        </div>
+    </div>
+
+    <!-- Popis produktu rész -->
+    <div class="product-description">
+        <h3>Popis produktu</h3>
+    </div>
+
+    <footer class="footer">
+        <span>Tel. číslo</span>
+        <span>Email</span>
+        <span>Sociálna média</span>
+        <span>Help</span>
+    </footer>
+</body>
+</html>
