@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Detaily o produkte</title>
+    <title>Kuriérska doprava</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -78,50 +78,59 @@
             left: 10px;
             margin-left: 20px;
         }
-        .product-container {
-            margin-top: 120px;
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+        .summary {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .shipping-methods {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .method {
+            display: flex;
+            align-items: center;
+            background: #f3e5f5;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .method input {
+            margin-right: 5px;
+        }
+        .form {
+            display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 10px;
         }
-        .product-left, .product-right {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
+        .form div {
+            flex: 1 1 45%;
         }
-        .product-left {
-            justify-content: center;
-        }
-        .product-right {
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-        }
-        .product-image {
-            width: 300px;
-            height: 300px;
-            background: gray;
-            flex-shrink: 0;
-        }
-        .product-details {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .product-description {
-            margin-top: 20px;
-            background: lightgray;
-            padding: 15px;
+        .form input {
+            width: 100%;
+            padding: 10px;
             border-radius: 5px;
-            min-height: 300px;
-            margin-left: 40px;
-            margin-right: 40px;
-            margin-bottom: 40px;
+            border: 1px solid #ccc;
+        }
+        .submit-button {
+            width: 100%;
+            padding: 10px;
+            background: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
         }
         .footer {
             display: flex;
@@ -166,18 +175,49 @@
         <button>Shop</button>
         <button>Best sellers</button>
     </nav>
-    <div class="product-container">
-        <div class="product-left">
-            <div class="product-image"></div>
+    <div class="container">
+        <div class="summary">
+            <span>Spolu:</span>
+            <span>cena</span>
         </div>
-        <div class="product-right">
-            <h2>Meno</h2>
-            <p>Cena</p>
-            <button style="background:black; color:white; padding:10px;">Pridať do košíka</button>
+        <button class="shipping-button">Spôsob dopravy</button>
+        <div class="shipping-methods">
+            <label class="method">
+                <input type="radio" name="shipping" checked>
+                Kuriérská služba
+            </label>
+            <label class="method">
+                <input type="radio" name="shipping">
+                Box collect
+            </label>
         </div>
-    </div>
-    <div class="product-description">
-        <h3>Popis produktu</h3>
+        <div class="form">
+            <div>
+                <label>Meno a priezvisko</label>
+                <input type="text">
+            </div>
+            <div>
+                <label>Číslo domu</label>
+                <input type="text">
+            </div>
+            <div>
+                <label>E-mail</label>
+                <input type="email">
+            </div>
+            <div>
+                <label>PSČ</label>
+                <input type="text">
+            </div>
+            <div>
+                <label>Telefónne číslo</label>
+                <input type="tel">
+            </div>
+            <div>
+                <label>Krajina</label>
+                <input type="text">
+            </div>
+        </div>
+        <button class="submit-button">Ďalej</button>
     </div>
     <div class="footer">
         <div>Tel. číslo</div>

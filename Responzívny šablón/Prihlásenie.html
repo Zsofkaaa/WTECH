@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prihlásenie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            background: #d8b8eb;
+            padding: 15px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .header .left {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+        .header .center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+        .home-icon {
+            font-size: 20px;
+        }
+        .form-container {
+            margin-top: 100px;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .form-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 48%;
+        }
+        .form-left label {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .form-left input {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .form-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48%;
+            flex-direction: column;
+        }
+        .form-right button {
+            padding: 10px 20px;
+            background-color: #000000;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #ffffff;
+            cursor: pointer;
+            margin-bottom: 20px;
+            margin-top: 5px;
+        }
+        .form-right button:hover {
+            background-color: #333333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="left">
+            <button class="home-icon">🏠</button>
+        </div>
+        <div class="center">
+            <div>Prihlásenie zákazníka</div>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="form-left">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Zadajte váš email">
+            </div>
+            <div class="input-group">
+                <label for="heslo">Heslo</label>
+                <input type="password" id="heslo" name="heslo" placeholder="Zadajte vaše heslo">
+            </div>
+        </div>
+
+        <div class="form-right">
+            <button type="submit">Prihlásiť sa</button>
+            <div>Nemáš účet?</div>
+            <button type="submit">Zaregistrovať sa</button>
+        </div>
+    </div>
+</body>
+</html>

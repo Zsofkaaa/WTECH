@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Spoločenské hry</title>
+    <title>Shop</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,6 +26,23 @@
             left: 0;
             width: 100%;
             z-index: 1000;
+        }
+        .header .left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+        .header .center {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+        }
+        .header .right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .search-bar {
             padding: 5px;
@@ -57,6 +74,11 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .home-icon {
+            position: absolute;
+            left: 10px;
+            margin-left: 20px;
+        }
         .container {
             display: flex;
             height: calc(100vh - 120px);
@@ -80,26 +102,24 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .filter-button {
+            position: absolute;
+            top: 5px;
+            right: 20px;
+            background: #ccc;
+            border: 1px solid #ccc;
+            padding: 12px 20px;
+            margin-right: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
         .products-container {
             flex: 1;
-            margin-top: 50px;
             margin-left: 220px;
             padding: 20px;
             overflow-y: auto;
             height: calc(100vh - 120px);
-            position: relative;
-        }
-        .filter-button {
-            position: fixed;
-            top: 135px;
-            right: 20px;
-            background: #ccc;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1001;
-            margin-right: 30px;
         }
         .products {
             display: grid;
@@ -156,21 +176,25 @@
 
 <body>
     <div class="header">
-        <span>LOGO</span>
-        <input type="text" class="search-bar" placeholder="Zadajte, čo hľadáte...">
-        <div>
+        <div class="left">
+            <span>LOGO</span>
+        </div>
+        <div class="center">
+            <input type="text" class="search-bar" placeholder="Zadajte, čo hľadáte...">
+        </div>
+        <div class="right">
+            <button class="login-btn">Prihlásenie/Registrácia</button>
             <button>❤️</button>
             <button>🛒</button>
         </div>
     </div>
     <nav class="nav">
-        <button>🏠</button>
+        <button class="home-icon">🏠</button>
         <button>Na predaj</button>
         <button>Novinky</button>
         <button>Shop</button>
         <button>Best sellers</button>
     </nav>
-    <div class="filter-button">Filter</div> <!-- A Filter gombot ide helyeztem -->
     <div class="container">
         <aside class="sidebar">
             <button class="category-button">Kategória 1</button>
@@ -183,6 +207,7 @@
             <button class="category-button">Kategória 8</button>
         </aside>
         <div class="products-container">
+            <button class="filter-button">Filter</button>
             <section class="products">
                 <div class="product-card"><div class="product-image"></div><h3>Meno</h3><p>Cena</p><button>Pridať do košíka</button></div>
                 <div class="product-card"><div class="product-image"></div><h3>Meno</h3><p>Cena</p><button>Pridať do košíka</button></div>

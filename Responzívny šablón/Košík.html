@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Detaily o produkte</title>
+    <title>Košík</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -78,50 +78,67 @@
             left: 10px;
             margin-left: 20px;
         }
-        .product-container {
-            margin-top: 120px;
+        .container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: white;
             padding: 20px;
-            flex-wrap: wrap;
-            gap: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
         }
-        .product-left, .product-right {
+        .cart {
+            flex: 2;
+            margin-right: 20px;
+        }
+        .cart-item {
             display: flex;
-            justify-content: center;
             align-items: center;
+            background: #b3b3b3;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            background: lightgray;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .cart-item .name {
             flex: 1;
         }
-        .product-left {
-            justify-content: center;
+        .quantity {
+            display: flex;
+            align-items: center;
+            background: black;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
         }
-        .product-right {
-            flex-direction: column;
-            justify-content: center;
+        .quantity button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .summary {
+            flex: 1;
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
             text-align: center;
         }
-        .product-image {
-            width: 300px;
-            height: 300px;
-            background: gray;
-            flex-shrink: 0;
-        }
-        .product-details {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .product-description {
-            margin-top: 20px;
-            background: lightgray;
-            padding: 15px;
+        .summary button {
+            width: 100%;
+            padding: 10px;
+            background: black;
+            color: white;
+            border: none;
             border-radius: 5px;
-            min-height: 300px;
-            margin-left: 40px;
-            margin-right: 40px;
-            margin-bottom: 40px;
+            cursor: pointer;
         }
         .footer {
             display: flex;
@@ -166,18 +183,37 @@
         <button>Shop</button>
         <button>Best sellers</button>
     </nav>
-    <div class="product-container">
-        <div class="product-left">
-            <div class="product-image"></div>
+    <div class="container">
+        <div class="cart">
+            <h3>Košík (počet produktov)</h3>
+            <div class="cart-item">
+                <img src="#" alt="product">
+                <div class="name">Meno</div>
+                <div class="quantity">
+                    <button>-</button>
+                    <span>1</span>
+                    <button>+</button>
+                </div>
+                <div class="price">€ 9,99</div>
+                <button class="remove">✖</button>
+            </div>
+            <div class="cart-item">
+                <img src="#" alt="product">
+                <div class="name">Meno</div>
+                <div class="quantity">
+                    <button>-</button>
+                    <span>1</span>
+                    <button>+</button>
+                </div>
+                <div class="price">€ 9,99</div>
+                <button class="remove">✖</button>
+            </div>
         </div>
-        <div class="product-right">
-            <h2>Meno</h2>
-            <p>Cena</p>
-            <button style="background:black; color:white; padding:10px;">Pridať do košíka</button>
+        <div class="summary">
+            <div>Spolu:</div>
+            <div>cena</div>
+            <button>Platba</button>
         </div>
-    </div>
-    <div class="product-description">
-        <h3>Popis produktu</h3>
     </div>
     <div class="footer">
         <div>Tel. číslo</div>
