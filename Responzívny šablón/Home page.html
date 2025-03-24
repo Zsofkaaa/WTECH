@@ -10,9 +10,10 @@
             margin: 0;
             padding: 0;
             background-color: #f8f8f8;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            overflow: hidden;
         }
         .header {
             background: #d8b8eb;
@@ -49,11 +50,6 @@
             border-radius: 5px;
             border: 1px solid #ccc;
         }
-        .header div {
-            display: flex;
-            gap: 10px;
-            margin-right: 20px;
-        }
         .nav {
             display: flex;
             justify-content: center;
@@ -66,17 +62,67 @@
             width: 100%;
             z-index: 1000;
         }
-        .nav button {
+        .container {
+            display: flex;
+            height: calc(100vh - 120px);
+            margin-top: 120px;
+            align-items: center;
+        }
+        .sidebar {
+            width: 200px;
+            background: gray;
+            padding: 15px;
+            position: fixed;
+            top: 120px;
+            bottom: 0;
+            left: 0;
+        }
+        .category-button {
+            display: block;
             background: white;
-            border: 1px solid #ccc;
+            margin-bottom: 10px;
             padding: 10px;
+            text-align: center;
             border-radius: 5px;
             cursor: pointer;
         }
-        .home-icon {
-            position: absolute;
-            left: 10px;
-            margin-left: 20px;
+        .products-container {
+            flex: 1;
+            margin-left: 220px;
+            padding: 20px;
+            overflow-y: auto;
+            height: calc(100vh - 120px);
+            align-items: center;
+        }
+        .section {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .carousel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .arrow {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .product-card {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            width: 150px;
+            height: 150px;
         }
         .footer {
             display: flex;
@@ -91,20 +137,11 @@
             width: 100%;
             margin-top: 10px;
         }
-        .footer div {
-            flex: 1;
-            min-width: 120px;
-        }
     </style>
 </head>
-
-
-
 <body>
     <div class="header">
-        <div class="left">
-            <span>LOGO</span>
-        </div>
+        <div class="left"><span>LOGO</span></div>
         <div class="center">
             <input type="text" class="search-bar" placeholder="Zadajte, čo hľadáte...">
         </div>
@@ -121,11 +158,51 @@
         <button>Shop</button>
         <button>Best sellers</button>
     </nav>
-    <div class="footer">
-        <div>Tel. číslo</div>
-        <div>Email</div>
-        <div>Sociálna média</div>
-        <div>Help</div>
+    <div class="container">
+        <aside class="sidebar">
+            <button class="category-button">Kategória 1</button>
+            <button class="category-button">Kategória 2</button>
+            <button class="category-button">Kategória 3</button>
+            <button class="category-button">Kategória 4</button>
+        </aside>
+        <div class="products-container">
+            <div class="section">
+                <div class="section-title">Na predaj</div>
+                <div class="carousel">
+                    <button class="arrow">◀</button>
+                    <div class="product-card"></div>
+                    <div class="product-card"></div>
+                    <div class="product-card"></div>
+                    <button class="arrow">▶</button>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-title">Novinky</div>
+                <div class="carousel">
+                    <button class="arrow">◀</button>
+                    <div class="product-card"></div>
+                    <div class="product-card"></div>
+                    <div class="product-card"></div>
+                    <button class="arrow">▶</button>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-title">Best sellers</div>
+                <div class="carousel">
+                    <button class="arrow">◀</button>
+                    <div class="product-card"></div>
+                    <div class="product-card"></div>
+                    <div class="product-card"></div>
+                    <button class="arrow">▶</button>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Tel. číslo</div>
+                <div>Email</div>
+                <div>Sociálna média</div>
+                <div>Help</div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
