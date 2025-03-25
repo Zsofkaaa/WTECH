@@ -44,6 +44,17 @@
             align-items: center;
             gap: 10px;
         }
+        .logo {
+            width: 130px;
+            height: 90px;
+            border-radius: 10px;
+            object-fit: cover;
+            position: fixed;
+            top: 10px;
+            left: 20px;
+            z-index: 1100;
+            border: 3px solid black;
+        }
         .search-bar {
             padding: 5px;
             width: 200px;
@@ -59,7 +70,7 @@
             display: flex;
             justify-content: center;
             gap: 10px;
-            background: white;
+            background: #d8b8eb;
             padding: 10px;
             position: fixed;
             top: 60px;
@@ -73,11 +84,6 @@
             padding: 10px;
             border-radius: 5px;
             cursor: pointer;
-        }
-        .home-icon {
-            position: absolute;
-            left: 10px;
-            margin-left: 20px;
         }
         .container {
             display: flex;
@@ -175,6 +181,7 @@
 
 
 <body>
+    <img src="C:\Users\User\Desktop\FIIT STU\4. szemeszter\WTECH\Kepek\logo.jpg" alt="Logo" class="logo">
     <div class="header">
         <div class="left">
             <span>LOGO</span>
@@ -189,8 +196,8 @@
         </div>
     </div>
     <nav class="nav">
-        <button class="home-icon">🏠</button>
-        <button>Na predaj</button>
+        <button>🏠</button>
+        <button>Akcie</button>
         <button>Novinky</button>
         <button>Shop</button>
         <button>Best sellers</button>

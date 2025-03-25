@@ -44,17 +44,33 @@
             align-items: center;
             gap: 10px;
         }
+        .logo {
+            width: 130px;
+            height: 90px;
+            border-radius: 10px;
+            object-fit: cover;
+            position: fixed;
+            top: 10px;
+            left: 20px;
+            z-index: 1100;
+            border: 3px solid black;
+        }
         .search-bar {
             padding: 5px;
             width: 200px;
             border-radius: 5px;
             border: 1px solid #ccc;
         }
+        .header div {
+            display: flex;
+            gap: 10px;
+            margin-right: 20px;
+        }
         .nav {
             display: flex;
             justify-content: center;
             gap: 10px;
-            background: white;
+            background: #d8b8eb;
             padding: 10px;
             position: fixed;
             top: 60px;
@@ -62,10 +78,17 @@
             width: 100%;
             z-index: 1000;
         }
+        .nav button {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         .container {
             display: flex;
             height: calc(100vh - 120px);
-            margin-top: 120px;
+            margin-top: 140px;
             align-items: center;
         }
         .sidebar {
@@ -140,8 +163,11 @@
     </style>
 </head>
 <body>
+    <img src="C:\Users\User\Desktop\FIIT STU\4. szemeszter\WTECH\Kepek\logo.jpg" alt="Logo" class="logo">
     <div class="header">
-        <div class="left"><span>LOGO</span></div>
+        <div class="left">
+            <span>LOGO</span>
+        </div>
         <div class="center">
             <input type="text" class="search-bar" placeholder="Zadajte, čo hľadáte...">
         </div>
@@ -152,8 +178,8 @@
         </div>
     </div>
     <nav class="nav">
-        <button class="home-icon">🏠</button>
-        <button>Na predaj</button>
+        <button>🏠</button>
+        <button>Akcie</button>
         <button>Novinky</button>
         <button>Shop</button>
         <button>Best sellers</button>
@@ -167,7 +193,7 @@
         </aside>
         <div class="products-container">
             <div class="section">
-                <div class="section-title">Na predaj</div>
+                <div class="section-title">Akcie</div>
                 <div class="carousel">
                     <button class="arrow">◀</button>
                     <div class="product-card"></div>
