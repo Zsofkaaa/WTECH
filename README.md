@@ -1,2 +1,2 @@
 # WTECH
-Téma: Spoločenské stolové hry
+Téma: Spoločenské hry
