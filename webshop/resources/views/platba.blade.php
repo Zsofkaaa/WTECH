@@ -6,7 +6,11 @@
     <title>Platba</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/platba.css') }}" rel="stylesheet">
+<<<<<<< HEAD
+
+=======
     
+>>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
 </head>
 
 
@@ -46,7 +50,11 @@
                             </div>
                         </div>
                         <div class="mt-3 d-flex justify-content-center">
+<<<<<<< HEAD
+
+=======
                             
+>>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
                             <button onclick="submitPayment()" class="btn btn-dark btn-narrow">Dokončenie objednávky</button>
                         </div>
                     </div>
@@ -54,7 +62,11 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+
+=======
     
+>>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
     @include('partials.footer')
 
     <script>
@@ -63,8 +75,13 @@
             document.getElementById('radio-cash').classList.remove('selected');
             document.getElementById(`radio-${option}`).classList.add('selected');
         }
+<<<<<<< HEAD
+    </script>
+    <script src="{{asset('js/platba.js') }}"></script>
+=======
     </script>    
     <script src="{{ asset('js/platba.js') }}"></script>    
+>>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
