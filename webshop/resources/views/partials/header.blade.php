@@ -5,7 +5,11 @@
                 <a class="navbar-brand" href="#"><img src="{{ asset('Pictures/logo.jpg') }}" alt="Logo" class="logo"></a>
                 <input type="text" class="search-bar mx-3" placeholder="Zadajte, čo hľadáte...">
                 <div>
+<<<<<<< HEAD
+                    <button class="btn btn-outline-primary" onclick="window.location.href='/prihlasenie'">Prihlásenie/Registrácia</button>
+=======
                     <button class="btn btn-outline-primary">Prihlásenie/Registrácia</button>
+>>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
                     <button class="btn btn-outline-danger" onclick="window.location.href='/shop/oblubene'">❤️</button>
                     <button class="btn btn-outline-dark" onclick="window.location.href='/kosik'">🛒</button>
                 </div>
