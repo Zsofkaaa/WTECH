@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    padding-top: 90px;
+    padding-bottom: 50px;
+}
+.logo {
+    width: 80px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 3px solid black;
+}
+.navbar {
+    background: #d8b8eb !important;
+    padding-top: 2px !important;
+    padding-bottom: 10px !important;
+}
+.navbar button.btn {
+    font-size: 0.9rem;
+    padding: 0.05rem 0.5rem;
+}
+.navbar .btn-light {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+.search-bar {
+    width: 100%;
+    max-width: 220px;
+    height: 2rem;
+    font-size: 0.75rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.category-button {
+    display: block;
+    background: white;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: clamp(0.6rem, 1.2vw, 1rem);
+    padding: 0.8vw 0.8vw;
+    margin-bottom: 6px;
+}
+.product-card {
+    background: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    width: 150px;
+    height: 150px;
+    margin: 10px;
+}
+.carousel-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+.carousel-header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.carousel-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.arrow-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.arrow {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+.sidebar {
+    bottom: 40px;
+    align-items: left;
+    padding: 10px;
+    background: lightgray;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+.footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    background: #e0e0e0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: #d8b8eb !important;
+    padding: 8px !important;
+    font-size: 0.9rem;
+}
+.product-image {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.product-name {
+    font-size: 14px;
+    margin-top: 20px;
+    background-color: #d8b8eb;
+}

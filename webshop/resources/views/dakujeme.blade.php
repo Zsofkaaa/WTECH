@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ďakujeme za Vás nákup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('css/dakujeme.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-light fixed-top py-2 header">
+        <div class="container d-flex flex-wrap">
+            <div class="col-2 d-flex justify-content-start">
+                <a class="navbar-brand" href="#"><img src="Pictures/logo.jpg" alt="Logo" class="logo"></a>
+            </div>
+            <div class="col-8 d-flex justify-content-start">
+                <span class="fs-4">{{ $message }}</span>
+            </div>
+        </div>
+    </nav>
+    <div class="container form-container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="bg-white p-4 rounded shadow">
+                    <form>
+                        <button type="button" onclick="window.location.href='/'" class="btn btn-dark w-100">Prejsť na domovskú stránku</button>
+                        <button type="button" onclick="window.location.href='/shop'" class="btn btn-dark w-100 btn-spacing">Prejsť na zoznam produktov</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <footer class="footer py-3 mt-4">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-6 col-sm-3">Tel. číslo</div>
+                    <div class="col-6 col-sm-3">Email</div>
+                    <div class="col-6 col-sm-3">Sociálna média</div>
+                    <div class="col-6 col-sm-3">Help</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
