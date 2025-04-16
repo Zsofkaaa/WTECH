@@ -23,6 +23,14 @@ body {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
 }
+<<<<<<< HEAD
+.btn-dark {
+    background: black;
+    color: white;
+    margin-bottom: 120px;
+}
+=======
+>>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
 .search-bar {
     width: 100%;
     max-width: 220px;
@@ -37,11 +45,14 @@ body {
     background: #f3e8ff;
     padding: 10px;
 }
+<<<<<<< HEAD
+=======
 .btn-dark {
     background: black;
     color: white;
     margin-bottom: 120px;
 }
+>>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
 .radio-button {
     width: 16px;
     height: 16px;
@@ -73,4 +84,8 @@ body {
     background: #d8b8eb !important;
     padding: 8px !important;
     font-size: 0.9rem;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
