@@ -1,9 +1,14 @@
 <?php
 
+
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SideBarController;
 use App\Http\Controllers\NavBarController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DakujemeController;
+
+
 
 Route::get('/', function () {
     return view('home');
@@ -34,6 +39,13 @@ Route::get('/dakujeme', function () {
     return view('dakujeme');
 });
 
+Route::get('/prihlasenie', function () {
+    return view('prihlasenie');
+});
+
+Route::get('/registracia', function () {
+    return view('registracia');
+});
 
 Route::get('/shop/akcie', [NavBarController::class, 'showAkcie']);
 Route::get('/shop/novinky', [NavBarController::class, 'showNovinky']);
@@ -44,3 +56,4 @@ Route::get('/dakujeme', [DakujemeController::class, 'index'])->name('dakujeme');
 Route::get('/shop/{category}', [SideBarController::class, 'showCategory'])
     ->where('category', '^(?!akcie|novinky|best-sellers).*$');
 
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
