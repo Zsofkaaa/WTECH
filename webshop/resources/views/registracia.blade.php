@@ -23,34 +23,29 @@
         <div class="row justify-content-center">
             <div class="col-md-6" style="margin-bottom: 80px;">
                 <div class="bg-white p-4 rounded shadow">
-                    <form>
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Meno</label>
-                            <input type="text" class="form-control" id="name" placeholder="Zadajte vaše meno">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Zadajte vaše meno" required>
                         </div>
                         <div class="mb-3">
                             <label for="surname" class="form-label">Priezvisko</label>
-                            <input type="text" class="form-control" id="surname" placeholder="Zadajte vaše priezvisko">
+                            <input type="text" class="form-control" id="surname" name="surname" placeholder="Zadajte vaše priezvisko" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Zadajte váš email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Zadajte váš email" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Heslo</label>
-                            <input type="password" class="form-control" id="password" placeholder="Zadajte vaše heslo">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Zadajte vaše heslo" required>
                         </div>
                         <div class="mb-3">
                             <label for="confirm-password" class="form-label">Heslo ešte raz</label>
-                            <input type="password" class="form-control" id="confirm-password" placeholder="Zadajte vaše heslo ešte raz">
+                            <input type="password" class="form-control" id="confirm-password" name="password_confirmation" placeholder="Zadajte vaše heslo ešte raz" required>
                         </div>
-                        <button
-                            id="loginButton"
-                            type="button"
-                            class="btn btn-dark w-100"
-                            data-redirect="{{ route('dakujeme', ['source' => 'register']) }}">
-                            Zaregistrovať sa
-                        </button>
+                        <button type="submit" class="btn btn-dark w-100">Zaregistrovať sa</button>
                     </form>
                     <div class="text-center mt-3">Už máš účet? <a href="/prihlasenie" class="text-decoration-none">Prihlásiť sa</a></div>
                 </div>

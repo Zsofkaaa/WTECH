@@ -22,21 +22,12 @@
                 <span class="radio-button {{ request()->is('kurierskadoprava') ? 'selected' : '' }}" id="radio-kurier"></span>
                 Kuriérska služba
             </div>
-<<<<<<< HEAD
 
             <div class="shipping-option" onclick="window.location.href='{{ url('/boxcollect') }}'">
                 <span class="radio-button {{ request()->is('boxcollect') ? 'selected' : '' }}" id="radio-box"></span>
                 Box collect
             </div>
         </div>
-=======
-            
-            <div class="shipping-option" onclick="window.location.href='{{ url('/boxcollect') }}'">
-                <span class="radio-button {{ request()->is('boxcollect') ? 'selected' : '' }}" id="radio-box"></span>
-                Box collect
-            </div>   
-        </div>         
->>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
         </div>
 
         <form class="row g-3 mt-4">
@@ -59,15 +50,9 @@
         </form>
         <button onclick="location.href='{{ url('/platba') }}'" class="btn btn-dark mt-3">Ďalej na platbu</button>
     </div>
-<<<<<<< HEAD
 
     @include('partials.footer')
 
-=======
-    
-    @include('partials.footer')
-        
->>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
     <script>
          function selectShipping(option) {
         document.getElementById('radio-kurier').classList.remove('selected');

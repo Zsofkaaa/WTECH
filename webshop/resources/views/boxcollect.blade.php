@@ -6,22 +6,12 @@
     <title>Box collect</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/boxcollect.css') }}" rel="stylesheet">
-<<<<<<< HEAD
-
-=======
-     
->>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
 </head>
 
 
 
 <body>
     @include('partials.header')
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
     <div class="container mt-5 pt-5" style="margin-top: 120px !important;">
         <div class="price-container text-center">Spolu: cena</div>
         <div class="shipping-container p-3 mt-3">
@@ -31,21 +21,12 @@
                     <span class="radio-button {{ request()->is('kurierskadoprava') ? 'selected' : '' }}" id="radio-kurier"></span>
                     Kuriérska služba
                 </div>
-<<<<<<< HEAD
 
                 <div class="shipping-option" onclick="window.location.href='{{ url('/boxcollect') }}'">
                     <span class="radio-button {{ request()->is('boxcollect') ? 'selected' : '' }}" id="radio-box"></span>
                     Box collect
             </div>
         </div>
-=======
-                
-                <div class="shipping-option" onclick="window.location.href='{{ url('/boxcollect') }}'">
-                    <span class="radio-button {{ request()->is('boxcollect') ? 'selected' : '' }}" id="radio-box"></span>
-                    Box collect
-            </div> 
-        </div>           
->>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
         </div>
         <form class="row g-3 mt-4">
             <div class="col-md-6">
@@ -65,11 +46,6 @@
         </form>
         <button onclick="location.href='{{ url('/platba') }}'" class="btn btn-dark mt-3">Ďalej na platbu</button>
     </div>
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e
     @include('partials.footer')
 
     <script>
@@ -88,8 +64,4 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> dd9d09665a3b65e7b99ac5df0674ffb66f7b1e0e

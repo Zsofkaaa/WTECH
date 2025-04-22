@@ -23,22 +23,17 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="bg-white p-4 rounded shadow">
-                    <form>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Zadajte váš email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Zadajte váš email" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Heslo</label>
-                            <input type="password" class="form-control" id="password" placeholder="Zadajte vaše heslo">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Zadajte vaše heslo" required>
                         </div>
-                        <button
-                            id="loginButton"
-                            type="button"
-                            class="btn btn-dark w-100"
-                            data-redirect="{{ route('dakujeme', ['source' => 'login']) }}">
-                            Prihlásiť sa
-                        </button>
+                        <button type="submit" class="btn btn-dark w-100">Prihlásiť sa</button>
                     </form>
                     <div class="text-center mt-3">Ešte nemáš účet? <a href="/registracia" class="text-decoration-none">Zaregistrovať sa</a></div>
                 </div>
