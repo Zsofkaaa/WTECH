@@ -7,6 +7,8 @@ use App\Http\Controllers\SideBarController;
 use App\Http\Controllers\NavBarController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DakujemeController;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -57,3 +59,10 @@ Route::get('/shop/{category}', [SideBarController::class, 'showCategory'])
     ->where('category', '^(?!akcie|novinky|best-sellers).*$');
 
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/prihlasenie');
+})->name('logout');
