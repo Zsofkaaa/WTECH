@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            // Ha minden ki van töltve, irány a ďakujeme oldal
             window.location.href = loginButton.dataset.redirect;
         });
     }
