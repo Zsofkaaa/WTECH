@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //automatikus szokoz  a hosszu kartyaszamnem
     cardNumber.addEventListener('input', (e) => {
         let value = cardNumber.value.replace(/\D/g, ''); // ami nem szam eltavolitja
-        value = value.replace(/(.{4})(?=.)/g, '$1 '); 
+        value = value.replace(/(.{4})(?=.)/g, '$1 ');
         cardNumber.value = value;
     });
 
