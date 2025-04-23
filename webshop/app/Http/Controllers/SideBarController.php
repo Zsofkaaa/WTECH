@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class SideBarController extends Controller
 {
@@ -21,9 +22,13 @@ class SideBarController extends Controller
 
         $categoryTitle = $categories[$category] ?? 'Neznáma kategória';
 
+        $products = Product::where('category', $category)
+            ->with(['images' => fn($query) => $query->orderBy('filename')])
+            ->paginate(12);
+
         return view('shop', [
+            'products' => $products,
             'categoryTitle' => $categoryTitle
-            // 'products' => Product::where('discount', '>', 0)->get()
         ]);
     }
 }

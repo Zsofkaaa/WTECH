@@ -11,7 +11,6 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        // Validáció
         $request->validate([
             'name' => 'required|string',
             'surname' => 'required|string',
@@ -19,11 +18,10 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        // Mentés
         $user = new User();
         $user->name = $request->name . ' ' . $request->surname;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password); // jelszó titkosítás
+        $user->password = Hash::make($request->password);
         $user->save();
 
         return redirect()->route('dakujeme', ['source' => 'registracia']);
@@ -41,4 +39,16 @@ class AuthController extends Controller
             'email' => 'Nesprávny email alebo heslo.',
         ]);
     }
+
+    public function destroy(Request $request)
+    {
+        $user = auth()->user();
+
+        auth()->logout();
+
+        $user->delete();
+
+        return redirect('/')->with('success', 'Váš účet bol úspešne vymazaný.');
+    }
+
 }

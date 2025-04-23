@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+
 
 class ProductController extends Controller
 {
@@ -12,25 +14,80 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        // KÉSŐBB EZT ADATBÁZISBÓL KELL LEKÉRNI
-        $products = [
-            1 => ['name' => 'Túry Múry', 'image' => 'tury mury.jpg', 'price' => 12.99, 'description' => ''],
-            2 => ['name' => 'Blafuj', 'image' => 'blafuj.webp', 'price' => 9.99, 'description' => ''],
-            3 => ['name' => 'Človeče', 'image' => 'clovece.jpg', 'price' => 7.50, 'description' => ''],
-            4 => ['name' => 'Bang', 'image' => 'bang.jpg', 'price' => 12.99, 'description' => ''],
-            5 => ['name' => 'Dixit', 'image' => 'dixit.webp', 'price' => 9.99, 'description' => ''],
-            6 => ['name' => 'Monopoly', 'image' => 'monopoly.webp', 'price' => 7.50, 'description' => ''],
-            7 => ['name' => 'Activity', 'image' => 'activity.webp', 'price' => 12.99, 'description' => ''],
-            8 => ['name' => 'Uno Deluxe', 'image' => 'uno deluxe.jpg', 'price' => 9.99, 'description' => ''],
-            9 => ['name' => 'Exploding kittens', 'image' => 'exploding kittens.webp', 'price' => 7.50, 'description' => ''],
-        ];
-
-        if (!isset($products[$id])) {
-            abort(404, 'Termék nem található');
-        }
+        $product = Product::with(['images' => function($query) {
+            $query->orderBy('filename');
+        }])->findOrFail($id);
 
         return view('detaily', [
-            'product' => $products[$id]
+            'product' => $product
         ]);
+    }
+
+
+
+    public function index()
+    {
+        $products = Product::with(['images' => function($query) {
+            $query->orderBy('filename');
+        }])->paginate(12);
+
+        return view('shop', [
+            'products' => $products,
+            'categoryTitle' => 'Všetky produkty'
+        ]);
+    }
+
+    public function addToCart($id)
+    {
+        $product = Product::findOrFail($id);
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "name" => $product->name,
+                "quantity" => 1,
+                "price" => $product->price,
+                "image" => $product->images->first()->filename ?? 'placeholder.jpg'
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        return redirect()->back();
+    }
+
+    public function toggleFavorite($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->is_favorite = !$product->is_favorite;
+        $product->save();
+
+        return redirect()->back();
+    }
+
+    public function removeFromCart($id)
+    {
+        $cart = session()->get('cart', []);
+        unset($cart[$id]);
+        session()->put('cart', $cart);
+        return redirect()->back();
+    }
+
+    public function updateCartQuantity(Request $request, $id)
+    {
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            if ($request->action === 'increase') {
+                $cart[$id]['quantity']++;
+            } elseif ($request->action === 'decrease' && $cart[$id]['quantity'] > 1) {
+                $cart[$id]['quantity']--;
+            }
+        }
+
+        session()->put('cart', $cart);
+        return redirect()->back();
     }
 }

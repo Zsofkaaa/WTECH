@@ -13,6 +13,7 @@ class DakujemeController extends Controller
         $message = match($source) {
             'login' => 'Ste prihlásený!',
             'register' => 'Ďakujeme za registráciu!',
+            'registracia' => 'Ďakujeme za registráciu!',
             default => 'Ďakujeme za Váš nákup!',
         };
 
