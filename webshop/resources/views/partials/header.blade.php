@@ -5,6 +5,13 @@
                 <a class="navbar-brand" href="#"><img src="{{ asset('Pictures/logo.jpg') }}" alt="Logo" class="logo"></a>
                 <input type="text" class="search-bar mx-3" placeholder="Zadajte, čo hľadáte...">
                 <div>
+                    @if(auth()->check())
+                        <form action="{{ route('profil.zmazat') }}" method="POST" onsubmit="return confirm('Naozaj chcete vymazať svoj účet?');" class="d-inline-block ms-2">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-outline-danger">Vymazať účet</button>
+                        </form>
+                    @endif
                     @if(Auth::check())
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf
