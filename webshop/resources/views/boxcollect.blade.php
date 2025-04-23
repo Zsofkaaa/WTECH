@@ -31,7 +31,9 @@
         </div>           
         </div>
         
-        <form id="shipping-form" class="row g-3 mt-4 needs-validation" novalidate data-next-url="{{ url('/platba') }}">
+        <form id="shipping-form" class="row g-3 mt-4 needs-validation" novalidate  method="GET"
+        action="/platba">
+
             <div class="col-md-6">
                 <label class="form-label">Meno a priezvisko</label>
                 <input type="text" class="form-control" name="fullname" required 
@@ -49,20 +51,25 @@
                        title="Zadajte telefónne číslo (napr. +421123456789 alebo 0912345678).">
                 
                 <label class="form-label">Krajina</label>
-                <input type="text" class="form-control" name="country" required 
-                       pattern="^[A-Za-zÀ-ž ]+$" 
-                       title="Zadajte názov krajiny.">
+                <select name="country" id="country" class="form-select" required>
+                    <option value="Slovakia">Slovakia</option>
+                </select>
             </div>
         
             <div class="col-md-6">
                 <label class="form-label">Vybrať box</label>
-                <input type="text" class="form-control" name="box" required 
-                       pattern="^[A-Za-zÀ-ž0-9 ,.-]+$" 
-                       title="Zadajte miesto vyzdvihnutia.">
+                <select name="box_id" class="form-control" required>
+                    <option value="" disabled selected>Vyberte box</option>
+                    @foreach($locations as $location)
+                        <option value="{{ $location->id }}">{{ $location->name }} ({{ $location->address }})</option>
+                    @endforeach
+                </select>
             </div>
+            <button type="submit" id="submit-btn" class="btn btn-dark mt-3">Ďalej na platbu</button>
         </form>
         
-        <button id="submit-btn" class="btn btn-dark mt-3">Ďalej na platbu</button>
+        
+
         
     </div>
     
