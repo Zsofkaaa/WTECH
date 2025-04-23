@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('shipping-form');
 
     submitBtn.addEventListener('click', function (e) {
-        const inputs = form.querySelectorAll('input');
+        e.preventDefault();  
+        const inputs = form.querySelectorAll('input, select' );
         let isValid = true;
 
         inputs.forEach(input => {
@@ -19,11 +20,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 input.classList.add('is-valid');
             }
         });
+        
+        //boxcollectes cuccli kontrola
+        const boxSelect = form.querySelector('select[name="box_id"]');
+        if (!boxSelect.value) {
+            boxSelect.classList.add('is-invalid');
+            alert('Prosím, vyberte si box!'); 
+            isValid = false;  // Ne engedje tovább, ha nem válaszottak boxot
+        } else {
+            boxSelect.classList.remove('is-invalid');
+        }
 
         if (!isValid) {
             e.preventDefault();
         } else {
-            window.location.href = form.getAttribute('data-next-url');
+            //form.setAttribute('action', form.getAttribute('data-next-url'));  // Állítsd be az action URL-t
+            form.submit();
+            //window.location.href = form.getAttribute('data-next-url');
         }
     });
 });
