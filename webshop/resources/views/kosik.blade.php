@@ -13,45 +13,46 @@
     <div class="container mt-5 pt-5 cart-container" style="margin-top: 120px !important;">
         <div class="row">
             <div class="col-md-8">
-                <h3>Košík (počet produktov: 3)</h3>
-                <div class="cart-item d-flex align-items-center">
-                    <img src="{{ asset('Pictures/tury mury.jpg') }}" class="me-2" alt="product" width="50">
-                    <div class="flex-grow-1">Túry můry</div>
-                    <div class="quantity mx-2">
-                        <button class="btn btn-sm text-white">-</button>
-                        <span class="mx-2">1</span>
-                        <button class="btn btn-sm text-white">+</button>
+
+                @php $cart = session('cart', []); @endphp
+
+                <h3>Košík (počet produktov: {{ count($cart) }})</h3>
+
+                @foreach ($cart as $id => $item)
+                    <div class="cart-item d-flex align-items-center">
+                        <img src="{{ asset('Pictures/' . $item['image']) }}" class="me-2" alt="product" width="50">
+                        <div class="flex-grow-1">{{ $item['name'] }}</div>
+
+                        <!-- Mennyiség csökkentése -->
+                        <form action="{{ route('cart.update', ['id' => $id]) }}" method="POST" class="d-inline mx-1">
+                            @csrf
+                            <input type="hidden" name="action" value="decrease">
+                            <button class="btn btn-sm btn-secondary">-</button>
+                        </form>
+
+                        <span class="mx-2">{{ $item['quantity'] }}</span>
+
+                        <!-- Mennyiség növelése -->
+                        <form action="{{ route('cart.update', ['id' => $id]) }}" method="POST" class="d-inline mx-1">
+                            @csrf
+                            <input type="hidden" name="action" value="increase">
+                            <button class="btn btn-sm btn-secondary">+</button>
+                        </form>
+
+                        <div class="price mx-2">{{ $item['price'] * $item['quantity'] }}€</div>
+
+                        <!-- Törlés gomb -->
+                        <form action="{{ route('cart.remove', ['id' => $id]) }}" method="POST" class="d-inline">
+                            @csrf
+                            <button class="btn btn-danger btn-sm">✖</button>
+                        </form>
                     </div>
-                    <div class="price mx-2">20€</div>
-                    <button class="btn btn-danger btn-sm">✖</button>
-                </div>
-                <div class="cart-item d-flex align-items-center">
-                    <img src="{{ asset('Pictures/blafuj.webp') }}" class="me-2" alt="product" width="50">
-                    <div class="flex-grow-1">Blafuj</div>
-                    <div class="quantity mx-2">
-                        <button class="btn btn-sm text-white">-</button>
-                        <span class="mx-2">1</span>
-                        <button class="btn btn-sm text-white">+</button>
-                    </div>
-                    <div class="price mx-2">10€</div>
-                    <button class="btn btn-danger btn-sm">✖</button>
-                </div>
-                <div class="cart-item d-flex align-items-center">
-                    <img src="{{ asset('Pictures/clovece.jpg') }}" class="me-2" alt="product" width="50">
-                    <div class="flex-grow-1">Človeče</div>
-                    <div class="quantity mx-2">
-                        <button class="btn btn-sm text-white">-</button>
-                        <span class="mx-2">1</span>
-                        <button class="btn btn-sm text-white">+</button>
-                    </div>
-                    <div class="price mx-2">25€</div>
-                    <button class="btn btn-danger btn-sm">✖</button>
-                </div>
+                @endforeach
+
             </div>
             <div class="col-md-4 d-flex flex-column align-items-center">
                 <div class="summary p-3 w-100">
-                    <div>Spolu:</div>
-                    <div>55€</div>
+                    <div>Spolu: {{ collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']) }}€</div>
                     <button onclick="location.href='{{ url('/boxcollect') }}'"  class="btn btn-dark mt-3 w-100">Vybrať službu</button>
                 </div>
             </div>

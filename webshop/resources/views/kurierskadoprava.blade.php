@@ -22,12 +22,12 @@
                 <span class="radio-button {{ request()->is('kurierskadoprava') ? 'selected' : '' }}" id="radio-kurier"></span>
                 Kuriérska služba
             </div>
-            
+
             <div class="shipping-option" onclick="window.location.href='{{ url('/boxcollect') }}'">
                 <span class="radio-button {{ request()->is('boxcollect') ? 'selected' : '' }}" id="radio-box"></span>
                 Box collect
-            </div>   
-        </div>         
+            </div>
+        </div>
         </div>
 
         <form class="row g-3 mt-4">
@@ -35,7 +35,7 @@
                 <label class="form-label">Meno a priezvisko</label>
                 <input type="text" class="form-control" id="full-name" required pattern="^[A-ZÁÉÍÓÚÝŔĽŇŽŠČĎŤÄÖÜ][a-záéíóúýŕľňžščďťäöü]+( [A-ZÁÉÍÓÚÝŔĽŇŽŠČĎŤÄÖÜ][a-záéíóúýŕľňžščďťäöü]+)+$">
                 <div class="invalid-feedback">Zadajte celé meno vo formáte: Meno Priezvisko.</div>
-   
+
                 <label class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" required pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$">
                 <div class="invalid-feedback">Zadajte platnú emailovú adresu (napr. meno@example.com).</div>
@@ -62,9 +62,9 @@
         </form>
         <button id="next-button" class="btn btn-dark mt-3">Ďalej na platbu</button>
     </div>
-    
+
     @include('partials.footer')
-        
+
     <script>
          function selectShipping(option) {
         document.getElementById('radio-kurier').classList.remove('selected');

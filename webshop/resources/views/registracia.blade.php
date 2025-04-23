@@ -38,7 +38,7 @@
                             <input type="email" class="form-control" id="email" name="email" placeholder="Zadajte váš email" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Heslo</label>
+                            <label for="password" class="form-label">Heslo (min: 6 karakter)</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Zadajte vaše heslo" required>
                         </div>
                         <div class="mb-3">
