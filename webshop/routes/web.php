@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/shop', function () {
-    return view('shop', ['categoryTitle' => 'VÅ¡etky produkty']);
+    return view('shop', ['categoryTitle' => 'Všetky produkty']);
 });
 
 Route::get('/kosik', function () {
@@ -73,7 +73,15 @@ Route::delete('/profil/zmazat', [AuthController::class, 'destroy'])->middleware(
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::post('/cart/add/{id}', [ProductController::class, 'addToCart'])->name('cart.add');
+
+Route::post('/favorite/{id}', [ProductController::class, 'toggleFavorite'])->name('product.favorite');
+
+Route::post('/cart/remove/{id}', [ProductController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/cart/update/{id}', [ProductController::class, 'updateCartQuantity'])->name('cart.update');
+
+Route::post('/cart/add/{id}', [ProductController::class, 'addToCart'])->name('cart.add');
+Route::post('/favorite/toggle/{id}', [ProductController::class, 'toggleFavorite'])->name('favorite.toggle');
 
 Route::get('/boxcollect', [BoxCollectController::class, 'showForm'])->name('boxcollect.form');
 Route::post('/boxcollect', [BoxCollectController::class, 'submitForm'])->name('boxcollect.submit');
-
