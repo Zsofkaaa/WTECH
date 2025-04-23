@@ -8,6 +8,8 @@ use App\Http\Controllers\NavBarController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DakujemeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BoxCollectController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -17,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/shop', function () {
-    return view('shop', ['categoryTitle' => 'Všetky produkty']);
+    return view('shop', ['categoryTitle' => 'VÅ¡etky produkty']);
 });
 
 Route::get('/kosik', function () {
@@ -59,6 +61,7 @@ Route::get('/shop/{category}', [SideBarController::class, 'showCategory'])
     ->where('category', '^(?!akcie|novinky|best-sellers).*$');
 
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/shop', [ProductController::class, 'index'])->name('shop.index');
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -66,3 +69,11 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/prihlasenie');
 })->name('logout');
+Route::delete('/profil/zmazat', [AuthController::class, 'destroy'])->middleware('auth')->name('profil.zmazat');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+Route::get('/boxcollect', [BoxCollectController::class, 'showForm'])->name('boxcollect.form');
+Route::post('/boxcollect', [BoxCollectController::class, 'submitForm'])->name('boxcollect.submit');
+
