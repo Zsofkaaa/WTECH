@@ -6,6 +6,7 @@
     <title>Platba</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/platba.css') }}" rel="stylesheet">
+    
 </head>
 
 
@@ -32,19 +33,20 @@
                     <div class="mt-3">
                         <div class="mb-3">
                             <label>Číslo karty</label>
-                            <input type="text" class="form-control" id="card-number" placeholder="**** **** **** ****">
+                            <input type="text" class="form-control" id="card-number" placeholder="**** **** **** ****" maxlength="19" inputmode="numeric" pattern="\d{4} \d{4} \d{4} \d{4}">
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label>Dátum platnosti</label>
-                                <input type="text" class="form-control" id="card-expiry" placeholder="MM/RR">
+                                <input type="text" class="form-control" id="card-expiry" placeholder="MM/RR" pattern="(0[1-9]|1[0-2])/\d{2}">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label>CVC</label>
-                                <input type="text" class="form-control" id="card-cvc" placeholder="***">
+                                <input type="text" class="form-control" id="card-cvc" placeholder="***" maxlength="3" pattern="\d{3}">
                             </div>
                         </div>
                         <div class="mt-3 d-flex justify-content-center">
+                            
                             <button onclick="submitPayment()" class="btn btn-dark btn-narrow">Dokončenie objednávky</button>
                         </div>
                     </div>
@@ -52,6 +54,7 @@
             </div>
         </div>
     </div>
+    
     @include('partials.footer')
 
     <script>
@@ -60,8 +63,8 @@
             document.getElementById('radio-cash').classList.remove('selected');
             document.getElementById(`radio-${option}`).classList.add('selected');
         }
-    </script>
-    <script src="{{asset('js/platba.js') }}"></script>
+    </script>    
+    <script src="{{ asset('js/platba.js') }}"></script>    
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
