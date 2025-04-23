@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('box_collect_locations', function (Blueprint $table) {
+        Schema::create('product_images', function (Blueprint $table) {
             $table->id();
-        $table->string('name');       // Pl. „Bratislava - Avion”
-        $table->string('address');    // Pl. „Ivanská cesta 16, 821 04 Bratislava”
-        $table->timestamps();
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->string('filename'); // pl: 'clovece1.jpg'
+            $table->timestamps();
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('box_collect_locations');
+        Schema::dropIfExists('product_images');
     }
 };
