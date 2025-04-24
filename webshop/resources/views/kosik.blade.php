@@ -7,6 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/kosik.css') }}" rel="stylesheet">
 </head>
+
+
+
 <body>
     @include('partials.header')
 
@@ -23,7 +26,6 @@
                         <img src="{{ asset('Pictures/' . $item['image']) }}" class="me-2" alt="product" width="50">
                         <div class="flex-grow-1">{{ $item['name'] }}</div>
 
-                        <!-- Mennyiség csökkentése -->
                         <form action="{{ route('cart.update', ['id' => $id]) }}" method="POST" class="d-inline mx-1">
                             @csrf
                             <input type="hidden" name="action" value="decrease">
@@ -32,7 +34,6 @@
 
                         <span class="mx-2">{{ $item['quantity'] }}</span>
 
-                        <!-- Mennyiség növelése -->
                         <form action="{{ route('cart.update', ['id' => $id]) }}" method="POST" class="d-inline mx-1">
                             @csrf
                             <input type="hidden" name="action" value="increase">
@@ -52,11 +53,11 @@
                             @endif
                         </div>
 
-                        <!-- Törlés gomb -->
                         <form action="{{ route('cart.remove', ['id' => $id]) }}" method="POST" class="d-inline">
                             @csrf
                             <button class="btn btn-danger btn-sm">✖</button>
                         </form>
+
                     </div>
                 @endforeach
 
@@ -72,23 +73,12 @@
 
     @include('partials.footer')
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function checkCart() {
-            const cart = @json(session('cart', []));
-            let total = 0;
-    
-            for (const id in cart) {
-                const item = cart[id];
-                total += item.price * item.quantity;
-            }
-    
-            if (Object.keys(cart).length === 0 || total === 0) {
-                alert('Košík je prázdny alebo celková cena je 0€.');
-                return;
-            }
-            window.location.href = '{{ url('/boxcollect') }}';
-        }
+        window.cartData = @json(session('cart', []));
     </script>
+
+    <script src="{{ asset('js/kosik.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

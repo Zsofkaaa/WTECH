@@ -8,6 +8,8 @@
     <link href="{{ asset('css/dakujeme.css') }}" rel="stylesheet">
 </head>
 
+
+
 <body>
     <nav class="navbar navbar-light fixed-top py-2 header">
         <div class="container d-flex flex-wrap">
@@ -30,16 +32,9 @@
                 </div>
             </div>
         </div>
-        <footer class="footer py-3 mt-4">
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col-6 col-sm-3">Tel. číslo</div>
-                    <div class="col-6 col-sm-3">Email</div>
-                    <div class="col-6 col-sm-3">Sociálna média</div>
-                    <div class="col-6 col-sm-3">Help</div>
-                </div>
-            </div>
-        </footer>
+
+        @include('partials.footer')
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

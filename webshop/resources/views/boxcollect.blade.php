@@ -16,13 +16,13 @@
 
     @php $cart = session('cart', []); @endphp
 
-
     <div class="container mt-5 pt-5" style="margin-top: 120px !important;">
         <div class="price-container text-center">
             Spolu: {{ collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']) }}€ </div>
         <div class="shipping-container p-3 mt-3">
             <div>Spôsob dopravy:</div>
             <div class="d-flex justify-content-around mt-2">
+
                 <div class="shipping-option" onclick="window.location.href='{{ url('/kurierskadoprava') }}'">
                     <span class="radio-button {{ request()->is('kurierskadoprava') ? 'selected' : '' }}" id="radio-kurier"></span>
                     Kuriérska služba
@@ -31,14 +31,14 @@
                 <div class="shipping-option" onclick="window.location.href='{{ url('/boxcollect') }}'">
                     <span class="radio-button {{ request()->is('boxcollect') ? 'selected' : '' }}" id="radio-box"></span>
                     Box collect
+                </div>
+
             </div>
         </div>
-        </div>
-
         <form id="shipping-form" class="row g-3 mt-4 needs-validation" novalidate  method="GET"
         action="/platba">
-
             <div class="col-md-6">
+
                 <label class="form-label">Meno a priezvisko</label>
                 <input type="text" class="form-control" name="fullname" required
                        pattern="^[A-Za-zÀ-ž]+(?: [A-Za-zÀ-ž]+)+$"
@@ -58,23 +58,23 @@
                 <select name="country" id="country" class="form-select" required>
                     <option value="Slovakia">Slovakia</option>
                 </select>
-            </div>
 
+            </div>
             <div class="col-md-6">
                 <label class="form-label">Vybrať box</label>
                 <select name="box_id" class="form-control" required>
                     <option value="" disabled selected>Vyberte box</option>
+
                     @foreach($locations as $location)
                         <option value="{{ $location->id }}">{{ $location->name }} ({{ $location->address }})</option>
                     @endforeach
+
                 </select>
             </div>
             <div class="col-12 text-center">
             <button type="submit" id="submit-btn" class="btn btn-dark mt-3 px-4">Ďalej na platbu</button>
             </div>
         </form>
-
-
     </div>
 
     @include('partials.footer')
@@ -92,7 +92,9 @@
         }
     }
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/boxcollect.js') }}"></script>
+
 </body>
 </html>
