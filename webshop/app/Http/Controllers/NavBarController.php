@@ -13,6 +13,7 @@ class NavBarController extends Controller
         $minPrice = $request->query('min_price');
         $maxPrice = $request->query('max_price');
         $maxAge = $request->query('vekova_kategoria');
+        $players = $request->query('hracov');
 
         $products = Product::where('is_discounted', true)
             ->with(['images' => fn($query) => $query->orderBy('filename')]);
@@ -26,7 +27,11 @@ class NavBarController extends Controller
         }
 
         if (!is_null($maxAge)) {
-            $products->where('min_age', '<=', $maxAge);
+            $products->where('max_age', '<=', $maxAge);
+        }
+
+        if (!is_null($players)) {
+            $products->where('max_players', '>=', $players);
         }
 
         switch ($sort) {
@@ -52,8 +57,10 @@ class NavBarController extends Controller
             'categoryTitle' => 'Akcie',
             'sort' => $sort,
             'vekova_kategoria' => $maxAge,
+            'hracov' => $players,
         ]);
     }
+
 
     public function showNovinky(Request $request)
     {
@@ -61,6 +68,7 @@ class NavBarController extends Controller
         $minPrice = $request->query('min_price');
         $maxPrice = $request->query('max_price');
         $maxAge = $request->query('vekova_kategoria');
+        $players = $request->query('hracov');
 
         $products = Product::where('is_new', true)
             ->with(['images' => fn($query) => $query->orderBy('filename')]);
@@ -75,6 +83,10 @@ class NavBarController extends Controller
 
         if (!is_null($maxAge)) {
             $products->where('min_age', '<=', $maxAge);
+        }
+
+        if (!is_null($players)) {
+            $products->where('max_players', '>=', $players);
         }
 
         switch ($sort) {
@@ -109,6 +121,7 @@ class NavBarController extends Controller
         $minPrice = $request->query('min_price');
         $maxPrice = $request->query('max_price');
         $maxAge = $request->query('vekova_kategoria');
+        $players = $request->query('hracov');
 
         $products = Product::where('is_best_seller', true)
             ->with(['images' => fn($query) => $query->orderBy('filename')]);
@@ -123,6 +136,10 @@ class NavBarController extends Controller
 
         if (!is_null($maxAge)) {
             $products->where('min_age', '<=', $maxAge);
+        }
+
+        if (!is_null($players)) {
+            $products->where('max_players', '>=', $players);
         }
 
         switch ($sort) {
@@ -157,6 +174,7 @@ class NavBarController extends Controller
         $minPrice = $request->query('min_price');
         $maxPrice = $request->query('max_price');
         $maxAge = $request->query('vekova_kategoria');
+        $players = $request->query('hracov');
 
         $products = Product::where('is_favorite', true)
             ->with(['images' => fn($query) => $query->orderBy('filename')]);
@@ -171,6 +189,10 @@ class NavBarController extends Controller
 
         if (!is_null($maxAge)) {
             $products->where('min_age', '<=', $maxAge);
+        }
+
+        if (!is_null($players)) {
+            $products->where('max_players', '>=', $players);
         }
 
         switch ($sort) {
