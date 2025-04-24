@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputs = form.querySelectorAll('input');
     const nextButton = document.getElementById('next-button');
 
-    //alapbol tiltott
     nextButton.disabled = true;
 
     function validateForm() {
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     inputs.forEach(input => {
         input.addEventListener('input', () => {
-            input.classList.remove('is-invalid', 'is-valid'); //na reset
+            input.classList.remove('is-invalid', 'is-valid');
             validateForm();
         });
     });

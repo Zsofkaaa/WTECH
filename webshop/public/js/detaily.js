@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         testImg.onerror = function () {
-            // Try next/prev one time
             const fallbackIndex = direction > 0 ? newIndex + 1 : newIndex - 1;
             if (fallbackIndex !== currentIndex && fallbackIndex >= 1 && fallbackIndex <= maxImages) {
                 currentIndex = fallbackIndex;

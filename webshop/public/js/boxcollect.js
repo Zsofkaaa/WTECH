@@ -21,12 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        //boxcollectes cuccli kontrola
         const boxSelect = form.querySelector('select[name="box_id"]');
         if (!boxSelect.value) {
             boxSelect.classList.add('is-invalid');
             alert('Prosím, vyberte si box!');
-            isValid = false;  // Ne engedje tovább, ha nem válaszottak boxot
+            isValid = false;
         } else {
             boxSelect.classList.remove('is-invalid');
         }
@@ -34,9 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isValid) {
             e.preventDefault();
         } else {
-            //form.setAttribute('action', form.getAttribute('data-next-url'));  // Állítsd be az action URL-t
             form.submit();
-            //window.location.href = form.getAttribute('data-next-url');
         }
     });
 });

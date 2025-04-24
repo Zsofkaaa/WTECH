@@ -64,4 +64,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         window.location.href = '/dakujeme';
     });
+
+    function submitPayment() {
+        // You should collect payment details here if needed
+
+        // Submit to your order placement endpoint
+        fetch('/place-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({
+                // Include any payment details if needed
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = '/dakujeme';
+            } else {
+                alert('Error placing order');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error placing order');
+        });
+    }
+
 });
