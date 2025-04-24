@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
+
+
 class SideBarController extends Controller
 {
     public function showCategory($category)

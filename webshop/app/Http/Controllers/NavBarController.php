@@ -5,13 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
+
+
 class NavBarController extends Controller
 {
-    public function showAkcie()
+    public function showAkcie(Request $request)
     {
+        $sort = $request->query('sort', 'asc');
         $products = Product::where('is_discounted', true)
-            ->with(['images' => fn($query) => $query->orderBy('filename')])
-            ->paginate(12);
+            ->with(['images' => fn($query) => $query->orderBy('filename')]);
+
+        if ($sort === 'price_asc') {
+            $products = $products->orderBy('price', 'asc');
+        } elseif ($sort === 'price_desc') {
+            $products = $products->orderBy('price', 'desc');
+        } elseif ($sort === 'desc') {
+            $products = $products->orderBy('name', 'desc');
+        } else {
+            $products = $products->orderBy('name', 'asc');
+        }
+
+        $products = $products->paginate(12);
 
         return view('shop', [
             'products' => $products,
@@ -19,11 +33,26 @@ class NavBarController extends Controller
         ]);
     }
 
-    public function showNovinky()
+
+
+    public function showNovinky(Request $request)
     {
+        $sort = $request->query('sort', 'asc');
+
         $products = Product::where('is_new', true)
-            ->with(['images' => fn($query) => $query->orderBy('filename')])
-            ->paginate(12);
+            ->with(['images' => fn($query) => $query->orderBy('filename')]);
+
+        if ($sort === 'price_asc') {
+            $products = $products->orderBy('price', 'asc');
+        } elseif ($sort === 'price_desc') {
+            $products = $products->orderBy('price', 'desc');
+        } elseif ($sort === 'desc') {
+            $products = $products->orderBy('name', 'desc');
+        } else {
+            $products = $products->orderBy('name', 'asc');
+        }
+
+        $products = $products->paginate(12);
 
         return view('shop', [
             'products' => $products,
@@ -31,11 +60,26 @@ class NavBarController extends Controller
         ]);
     }
 
-    public function showBestSellers()
+
+
+    public function showBestSellers(Request $request)
     {
+        $sort = $request->query('sort', 'asc');
+
         $products = Product::where('is_best_seller', true)
-            ->with(['images' => fn($query) => $query->orderBy('filename')])
-            ->paginate(12);
+            ->with(['images' => fn($query) => $query->orderBy('filename')]);
+
+        if ($sort === 'price_asc') {
+            $products = $products->orderBy('price', 'asc');
+        } elseif ($sort === 'price_desc') {
+            $products = $products->orderBy('price', 'desc');
+        } elseif ($sort === 'desc') {
+            $products = $products->orderBy('name', 'desc');
+        } else {
+            $products = $products->orderBy('name', 'asc');
+        }
+
+        $products = $products->paginate(12);
 
         return view('shop', [
             'products' => $products,
@@ -43,11 +87,26 @@ class NavBarController extends Controller
         ]);
     }
 
-    public function showOblubene()
+
+
+    public function showOblubene(Request $request)
     {
-        $products = Product::where('is_favorite', true) // csak ha van ilyen mező
-            ->with(['images' => fn($query) => $query->orderBy('filename')])
-            ->paginate(12);
+        $sort = $request->query('sort', 'asc');
+
+        $products = Product::where('is_favorite', true)
+            ->with(['images' => fn($query) => $query->orderBy('filename')]);
+
+        if ($sort === 'price_asc') {
+            $products = $products->orderBy('price', 'asc');
+        } elseif ($sort === 'price_desc') {
+            $products = $products->orderBy('price', 'desc');
+        } elseif ($sort === 'desc') {
+            $products = $products->orderBy('name', 'desc');
+        } else {
+            $products = $products->orderBy('name', 'asc');
+        }
+
+        $products = $products->paginate(12);
 
         return view('shop', [
             'products' => $products,

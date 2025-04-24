@@ -7,12 +7,9 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 
+
 class ProductController extends Controller
 {
-    /**
-     * @param  int  $id
-     * @return \Illuminate\View\View
-     */
     public function show($id)
     {
         $product = Product::with(['images' => function($query) {
@@ -27,17 +24,53 @@ class ProductController extends Controller
 
 
 
-    public function index()
+    public function index(Request $request, $category = null)
     {
-        $products = Product::with(['images' => function($query) {
-            $query->orderBy('filename');
-        }])->paginate(12);
+        $sort = $request->query('sort', 'asc');
+        $query = Product::query();
+
+        if ($category) {
+            $query->where('category', $category);
+        }
+
+        $products = $query->get()->map(function ($product) {
+            $product->effective_price = $product->is_discounted && $product->discounted_price
+                ? $product->discounted_price
+                : $product->price;
+            return $product;
+        });
+
+        if ($sort === 'price_asc') {
+            $products = $products->sortBy('effective_price')->values();
+        } elseif ($sort === 'price_desc') {
+            $products = $products->sortByDesc('effective_price')->values();
+        } elseif ($sort === 'desc') {
+            $products = Product::orderBy('name', 'desc')->paginate(12);
+        } else {
+            $products = Product::orderBy('name', 'asc')->paginate(12);
+        }
+
+        if (in_array($sort, ['price_asc', 'price_desc'])) {
+            $perPage = 12;
+            $page = $request->input('page', 1);
+            $pagedItems = $products->slice(($page - 1) * $perPage, $perPage)->all();
+            $products = new \Illuminate\Pagination\LengthAwarePaginator(
+                $pagedItems,
+                $products->count(),
+                $perPage,
+                $page,
+                ['path' => $request->url(), 'query' => $request->query()]
+            );
+        }
 
         return view('shop', [
             'products' => $products,
-            'categoryTitle' => 'Všetky produkty'
+            'categoryTitle' => $category ? ucfirst($category) : 'Shop',
+            'sort' => $sort
         ]);
     }
+
+
 
     public function addToCart($id)
     {
@@ -70,7 +103,6 @@ class ProductController extends Controller
                 $cartItems = [];
             }
 
-            // Hozzáadjuk a terméket a kosárhoz
             if (isset($cartItems[$id])) {
                 $cartItems[$id]['quantity']++;
             } else {
@@ -86,15 +118,18 @@ class ProductController extends Controller
                 ];
             }
 
-            // Frissítjük vagy létrehozzuk a kosarat
             \App\Models\Cart::updateOrCreate(
                 ['user_id' => auth()->id()],
                 ['items' => json_encode($cartItems)]
             );
+
+            session()->put('cart', $cartItems);
         }
 
         return redirect()->back();
     }
+
+
 
     public function toggleFavorite($id)
     {
@@ -105,6 +140,8 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
+
+
     public function removeFromCart($id)
     {
         $cart = session()->get('cart', []);
@@ -113,6 +150,8 @@ class ProductController extends Controller
         $this->saveCartToDatabase();
         return redirect()->back();
     }
+
+
 
     public function updateCartQuantity(Request $request, $id)
     {
@@ -132,6 +171,7 @@ class ProductController extends Controller
     }
 
 
+
     private function saveCartToDatabase()
     {
         if (auth()->check()) {
@@ -141,6 +181,7 @@ class ProductController extends Controller
             );
         }
     }
+
 
 
     public static function isInCart($productId)
