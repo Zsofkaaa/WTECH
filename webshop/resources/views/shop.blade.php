@@ -44,7 +44,7 @@
                             Filter
                         </button>
                         <div class="dropdown-menu p-3" style="min-width: 250px;">
-                            <form method="GET" action="{{ route('shop.index', request()->route('category')) }}">
+                            <form method="GET" action="{{ url()->current() }}">
                                 <div class="mb-2">
                                     <label for="min_price" class="form-label">Cena od:</label>
                                     <input type="number" step="0.01" class="form-control" id="min_price" name="min_price" value="{{ request('min_price') }}">
