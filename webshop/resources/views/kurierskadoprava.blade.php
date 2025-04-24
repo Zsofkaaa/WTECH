@@ -13,8 +13,11 @@
 <body>
     @include('partials.header')
 
+    @php $cart = session('cart', []); @endphp
+
     <div class="container mt-5 pt-5" style="margin-top: 120px !important;">
-        <div class="price-container text-center">Spolu: cena</div>
+        <div class="price-container text-center">
+            Spolu: {{ collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']) }}€ </div>
         <div class="shipping-container p-3 mt-3">
             <div>Spôsob dopravy:</div>
             <div class="d-flex justify-content-around mt-2">
