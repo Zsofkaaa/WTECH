@@ -20,7 +20,8 @@ class ProductController extends Controller
         }])->findOrFail($id);
 
         return view('detaily', [
-            'product' => $product
+            'product' => $product,
+            'isInCart' => ProductController::isInCart($product->id),
         ]);
     }
 
@@ -139,6 +140,23 @@ class ProductController extends Controller
                 ['items' => json_encode(session('cart', []))]
             );
         }
+    }
+
+
+    public static function isInCart($productId)
+    {
+        if (auth()->check()) {
+            $cart = \App\Models\Cart::where('user_id', auth()->id())->first();
+            if ($cart) {
+                $items = json_decode($cart->items, true);
+                return isset($items[$productId]);
+            }
+        } else {
+            $cart = session()->get('cart', []);
+            return isset($cart[$productId]);
+        }
+
+        return false;
     }
 
 }
