@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\Category;
 use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
@@ -38,13 +39,15 @@ class ProductSeeder extends Seeder
             ['name' => 'Uno Deluxe', 'price' => 9.09, 'is_best_seller' => true],
         ];
 
+        $allCategories = Category::all();
+
         foreach ($products as $data) {
             $product = Product::create(array_merge([
                 'description' => 'Popis hry',
                 'min_age' => 6,
                 'min_players' => 2,
                 'max_players' => 6,
-                'category' => 'Rodinné'
+                //'category' => 'Rodinné'
             ], $data));
 
             $slugName = Str::slug($product->name);
@@ -60,6 +63,9 @@ class ProductSeeder extends Seeder
                 'product_id' => $product->id,
                 'filename' => $slugName . '2.jpg'
             ]);
+            $category = Category::where('slug', 'rodinne')->first();
+            $product->categories()->attach($category->id);
+            
         }
     }
 }
