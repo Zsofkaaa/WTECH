@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-
-
+use App\Models\Category; 
 
 class SideBarController extends Controller
 {
@@ -22,15 +21,23 @@ class SideBarController extends Controller
             'pamat' => 'Pamäťové hry'
         ];
 
+        
         $categoryTitle = $categories[$category] ?? 'Neznáma kategória';
 
-        $products = Product::where('category', $category)
-            ->with(['images' => fn($query) => $query->orderBy('filename')])
-            ->paginate(12);
+        $category = Category::where('slug', $category)->first();
+        
+        if (!$category) {
+            abort(404); 
+        }
+
+        $products = $category->products() 
+            ->with(['images' => fn($query) => $query->orderBy('filename')]) // Képlekérdezés
+            ->paginate(12); 
 
         return view('shop', [
             'products' => $products,
-            'categoryTitle' => $categoryTitle
+            'categoryTitle' => $categoryTitle,
+            'categorySlug' => $category
         ]);
     }
 }
