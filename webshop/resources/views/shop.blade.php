@@ -53,6 +53,10 @@
                                     <label for="max_price" class="form-label">Cena do:</label>
                                     <input type="number" step="0.01" class="form-control" id="max_price" name="max_price" value="{{ request('max_price') }}">
                                 </div>
+                                <div>
+                                    <label for="vekova_kategoria" class="form-label">Veková kategória:</label>
+                                    <input type="number" class="form-control" name="vekova_kategoria" id="vekova_kategoria" value="{{ request('vekova_kategoria') }}" min="0">
+                                </div>
                                 <input type="hidden" name="sort" value="{{ request('sort') }}">
                                 <button type="submit" class="btn btn-primary w-100">Použiť</button>
                             </form>
