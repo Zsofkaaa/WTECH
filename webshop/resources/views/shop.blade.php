@@ -45,18 +45,27 @@
                         </button>
                         <div class="dropdown-menu p-3" style="min-width: 250px;">
                             <form method="GET" action="{{ url()->current() }}">
+
                                 <div class="mb-2">
                                     <label for="min_price" class="form-label">Cena od:</label>
                                     <input type="number" step="0.01" class="form-control" id="min_price" name="min_price" value="{{ request('min_price') }}">
                                 </div>
+
                                 <div class="mb-2">
                                     <label for="max_price" class="form-label">Cena do:</label>
                                     <input type="number" step="0.01" class="form-control" id="max_price" name="max_price" value="{{ request('max_price') }}">
                                 </div>
-                                <div>
+
+                                <div class="mb-2">
                                     <label for="vekova_kategoria" class="form-label">Veková kategória:</label>
                                     <input type="number" class="form-control" name="vekova_kategoria" id="vekova_kategoria" value="{{ request('vekova_kategoria') }}" min="0">
                                 </div>
+
+                                <div class="mb-2">
+                                    <label for="hracov" class="form-label">Počet hráčov:</label>
+                                    <input type="number" class="form-control" name="hracov" id="hracov" value="{{ request('hracov') }}" min="0">
+                                </div>
+
                                 <input type="hidden" name="sort" value="{{ request('sort') }}">
                                 <button type="submit" class="btn btn-primary w-100">Použiť</button>
                             </form>
