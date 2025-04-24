@@ -27,48 +27,66 @@ class ProductController extends Controller
     public function index(Request $request, $category = null)
     {
         $sort = $request->query('sort', 'asc');
+        $minPrice = $request->query('min_price');
+        $maxPrice = $request->query('max_price');
+
         $query = Product::query();
 
         if ($category) {
             $query->where('category', $category);
         }
 
-        $products = $query->get()->map(function ($product) {
-            $product->effective_price = $product->is_discounted && $product->discounted_price
+        // Eager load képekhez
+        $query->with('images');
+
+        $products = $query->get()->filter(function ($product) use ($minPrice, $maxPrice) {
+            $effectivePrice = $product->is_discounted && $product->discounted_price
                 ? $product->discounted_price
                 : $product->price;
-            return $product;
+
+            // Ár szűrés alkalmazása
+            if ($minPrice !== null && $effectivePrice < $minPrice) {
+                return false;
+            }
+            if ($maxPrice !== null && $effectivePrice > $maxPrice) {
+                return false;
+            }
+
+            // Beállítjuk a szűrt ár a modelben
+            $product->effective_price = $effectivePrice;
+            return true;
         });
 
+        // Rendezes
         if ($sort === 'price_asc') {
             $products = $products->sortBy('effective_price')->values();
         } elseif ($sort === 'price_desc') {
             $products = $products->sortByDesc('effective_price')->values();
         } elseif ($sort === 'desc') {
-            $products = Product::orderBy('name', 'desc')->paginate(12);
+            $products = $products->sortByDesc('name')->values();
         } else {
-            $products = Product::orderBy('name', 'asc')->paginate(12);
+            $products = $products->sortBy('name')->values();
         }
 
-        if (in_array($sort, ['price_asc', 'price_desc'])) {
-            $perPage = 12;
-            $page = $request->input('page', 1);
-            $pagedItems = $products->slice(($page - 1) * $perPage, $perPage)->all();
-            $products = new \Illuminate\Pagination\LengthAwarePaginator(
-                $pagedItems,
-                $products->count(),
-                $perPage,
-                $page,
-                ['path' => $request->url(), 'query' => $request->query()]
-            );
-        }
+        // Manuális lapozás, mivel collection-t szűrünk és rendezzünk
+        $perPage = 12;
+        $page = $request->input('page', 1);
+        $pagedItems = $products->slice(($page - 1) * $perPage, $perPage)->values();
+        $paginated = new \Illuminate\Pagination\LengthAwarePaginator(
+            $pagedItems,
+            $products->count(),
+            $perPage,
+            $page,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
 
         return view('shop', [
-            'products' => $products,
+            'products' => $paginated,
             'categoryTitle' => $category ? ucfirst($category) : 'Shop',
             'sort' => $sort
         ]);
     }
+
 
 
 
