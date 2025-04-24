@@ -134,3 +134,12 @@ body {
     font-size: 0.7rem;
     padding: 0.2rem 0.4rem;
 }
+.text-decoration-line-through {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.text-danger {
+    color: red;
+    font-weight: bold;
+}
