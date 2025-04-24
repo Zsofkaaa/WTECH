@@ -46,11 +46,17 @@
                     @endif
                 </p>
                 <div class="d-flex align-items-center gap-2 mt-2">
-                    <!-- Pridať do košíka -->
+                    @if ($isInCart)
+                    <form action="{{ route('cart.remove', ['id' => $product->id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger">Odobrať z košíka</button>
+                    </form>
+                    @else
                     <form action="{{ route('cart.add', ['id' => $product->id]) }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-dark">Pridať do košíka</button>
                     </form>
+                    @endif
 
                     <!-- Pridať do obľúbených -->
                     <form action="{{ route('favorite.toggle', ['id' => $product->id]) }}" method="POST">
