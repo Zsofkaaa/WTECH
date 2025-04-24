@@ -4,8 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
-
 return new class extends Migration
 {
     /**
@@ -21,15 +19,12 @@ return new class extends Migration
             $table->integer('min_age');
             $table->integer('min_players');
             $table->integer('max_players');
-            $table->string('category');
             $table->boolean('is_new')->default(false);
             $table->boolean('is_best_seller')->default(false);
             $table->boolean('is_discounted')->default(false);
             $table->timestamps();
         });
     }
-
-
 
     /**
      * Reverse the migrations.
