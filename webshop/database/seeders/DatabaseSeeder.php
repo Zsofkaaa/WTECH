@@ -7,8 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\ProductSeeder;
 use Illuminate\Support\Facades\Hash;
-
-
+use Database\Seeders\CategorySeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,10 +23,10 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $this->call(ProductSeeder::class);
-
         $this->call([
+            CategorySeeder::class,
             BoxCollectLocationSeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }
