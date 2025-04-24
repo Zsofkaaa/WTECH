@@ -88,7 +88,7 @@ class AuthController extends Controller
 {
     // Ha a session-ban van kosár, töröljük
     session()->forget('cart');
-    
+
     Auth::logout();
     return redirect('/');
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;  
+use Illuminate\Support\Facades\Auth;
 
 
 class ProductController extends Controller
@@ -41,8 +41,11 @@ class ProductController extends Controller
     public function addToCart($id)
     {
         $product = Product::findOrFail($id);
-        
-        // Ha nincs bejelentkezve, a kosarat a session-ban tároljuk
+        $cart = session()->get('cart', []);
+        $price = $product->is_discounted && $product->discounted_price
+            ? $product->discounted_price
+            : $product->price;
+
         if (!Auth::check()) {
             $cart = session()->get('cart', []);
             if (isset($cart[$id])) {
@@ -51,13 +54,14 @@ class ProductController extends Controller
                 $cart[$id] = [
                     "name" => $product->name,
                     "quantity" => 1,
-                    "price" => $product->price,
+                    "price" => $price,
+                    "original_price" => $product->price,
+                    "is_discounted" => $product->is_discounted,
                     "image" => $product->images->first()->filename ?? 'placeholder.jpg'
                 ];
             }
             session()->put('cart', $cart);
         } else {
-            // Ha be vagy jelentkezve, az adatbázisba mentjük a kosarat
             $cart = \App\Models\Cart::where('user_id', auth()->id())->first();
             if ($cart) {
                 $cartItems = json_decode($cart->items, true);
@@ -72,7 +76,11 @@ class ProductController extends Controller
                 $cartItems[$id] = [
                     'name' => $product->name,
                     'quantity' => 1,
-                    'price' => $product->price,
+                    'price' => $product->is_discounted && $product->discounted_price
+                        ? $product->discounted_price
+                        : $product->price,
+                    'original_price' => $product->price,
+                    'is_discounted' => $product->is_discounted,
                     'image' => $product->images->first()->filename ?? 'placeholder.jpg'
                 ];
             }
@@ -101,7 +109,7 @@ class ProductController extends Controller
         $cart = session()->get('cart', []);
         unset($cart[$id]);
         session()->put('cart', $cart);
-        $this->saveCartToDatabase(); 
+        $this->saveCartToDatabase();
         return redirect()->back();
     }
 
@@ -118,9 +126,11 @@ class ProductController extends Controller
         }
 
         session()->put('cart', $cart);
-        $this->saveCartToDatabase(); 
+        $this->saveCartToDatabase();
         return redirect()->back();
     }
+
+
     private function saveCartToDatabase()
     {
         if (auth()->check()) {
@@ -129,5 +139,6 @@ class ProductController extends Controller
                 ['items' => json_encode(session('cart', []))]
             );
         }
-    }   
+    }
+
 }
