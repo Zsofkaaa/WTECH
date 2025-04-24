@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BoxCollectController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\OrderController;
 
 
 
@@ -73,8 +74,6 @@ Route::delete('/profil/zmazat', [AuthController::class, 'destroy'])->middleware(
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::post('/cart/add/{id}', [ProductController::class, 'addToCart'])->name('cart.add');
-
 Route::post('/favorite/{id}', [ProductController::class, 'toggleFavorite'])->name('product.favorite');
 
 Route::post('/cart/remove/{id}', [ProductController::class, 'removeFromCart'])->name('cart.remove');
@@ -95,4 +94,5 @@ Route::post('/logout', function () {
     return redirect('/prihlasenie');
 })->name('logout');
 
-Route::post('/cart/remove/{id}', [ProductController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('place.order');
+
