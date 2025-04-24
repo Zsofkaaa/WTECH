@@ -94,3 +94,5 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/prihlasenie');
 })->name('logout');
+
+Route::post('/cart/remove/{id}', [ProductController::class, 'removeFromCart'])->name('cart.remove');
