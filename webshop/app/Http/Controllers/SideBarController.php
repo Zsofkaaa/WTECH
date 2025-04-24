@@ -31,16 +31,22 @@ class SideBarController extends Controller
         $minPrice = $request->input('min_price');
         $maxPrice = $request->input('max_price');
         $sort = $request->input('sort', 'default');
+        $maxAge = $request->input('vekova_kategoria'); // ÚJ: életkor szűrés
 
         $productsQuery = $category->products()->with(['images' => fn($query) => $query->orderBy('filename')]);
 
-        // Ár szűrés: ha discounted_price van, azt vegyük
+        // Ár szűrés (discounted_price figyelembe véve)
         if (!is_null($minPrice)) {
             $productsQuery->whereRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) >= ?', [$minPrice]);
         }
 
         if (!is_null($maxPrice)) {
             $productsQuery->whereRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) <= ?', [$maxPrice]);
+        }
+
+        // Életkor szűrés
+        if (!is_null($maxAge)) {
+            $productsQuery->where('min_age', '<=', $maxAge);
         }
 
         // Rendezés
@@ -69,6 +75,7 @@ class SideBarController extends Controller
             'categoryTitle' => $categoryTitle,
             'categorySlug' => $categorySlug,
             'sort' => $sort,
+            'vekova_kategoria' => $maxAge,
         ]);
     }
 }
