@@ -3,7 +3,9 @@
         <div class="d-flex flex-column w-100">
             <div class="d-flex justify-content-between align-items-center">
                 <a class="navbar-brand" href="#"><img src="{{ asset('Pictures/logo.jpg') }}" alt="Logo" class="logo"></a>
-                <input type="text" class="search-bar mx-3" placeholder="Zadajte, čo hľadáte...">
+                <form action="{{ route('search') }}" method="GET" class="mx-3 w-100">
+                    <input type="text" name="query" class="search-bar w-100" placeholder="Zadajte, čo hľadáte...">
+                </form>
                 <div>
                     @if(auth()->check())
                         <form action="{{ route('profil.zmazat') }}" method="POST" onsubmit="return confirm('Naozaj chcete vymazať svoj účet?');" class="d-inline-block ms-2">
