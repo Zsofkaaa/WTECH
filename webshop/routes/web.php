@@ -85,3 +85,10 @@ Route::post('/favorite/toggle/{id}', [ProductController::class, 'toggleFavorite'
 
 Route::get('/boxcollect', [BoxCollectController::class, 'showForm'])->name('boxcollect.form');
 Route::post('/boxcollect', [BoxCollectController::class, 'submitForm'])->name('boxcollect.submit');
+
+Route::post('/logout', function () {
+    
+    session()->forget('cart');
+    Auth::logout();
+    return redirect('/prihlasenie');
+})->name('logout');
