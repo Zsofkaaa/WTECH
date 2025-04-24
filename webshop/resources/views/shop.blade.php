@@ -38,7 +38,26 @@
                         </ul>
                     </div>
 
-                    <button class="btn btn-outline-secondary">Filter</button>
+
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filter
+                        </button>
+                        <div class="dropdown-menu p-3" style="min-width: 250px;">
+                            <form method="GET" action="{{ route('shop.index', request()->route('category')) }}">
+                                <div class="mb-2">
+                                    <label for="min_price" class="form-label">Cena od:</label>
+                                    <input type="number" step="0.01" class="form-control" id="min_price" name="min_price" value="{{ request('min_price') }}">
+                                </div>
+                                <div class="mb-2">
+                                    <label for="max_price" class="form-label">Cena do:</label>
+                                    <input type="number" step="0.01" class="form-control" id="max_price" name="max_price" value="{{ request('max_price') }}">
+                                </div>
+                                <input type="hidden" name="sort" value="{{ request('sort') }}">
+                                <button type="submit" class="btn btn-primary w-100">Použiť</button>
+                            </form>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="container pt-1">
