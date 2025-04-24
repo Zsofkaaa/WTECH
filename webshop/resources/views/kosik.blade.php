@@ -64,7 +64,7 @@
             <div class="col-md-4 d-flex flex-column align-items-center">
                 <div class="summary p-3 w-100">
                     <div>Spolu: {{ collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']) }}€</div>
-                    <button onclick="location.href='{{ url('/boxcollect') }}'"  class="btn btn-dark mt-3 w-100">Vybrať službu</button>
+                    <button onclick="checkCart()" class="btn btn-dark mt-3 w-100">Vybrať službu</button>
                 </div>
             </div>
         </div>
@@ -73,5 +73,22 @@
     @include('partials.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function checkCart() {
+            const cart = @json(session('cart', []));
+            let total = 0;
+    
+            for (const id in cart) {
+                const item = cart[id];
+                total += item.price * item.quantity;
+            }
+    
+            if (Object.keys(cart).length === 0 || total === 0) {
+                alert('Košík je prázdny alebo celková cena je 0€.');
+                return;
+            }
+            window.location.href = '{{ url('/boxcollect') }}';
+        }
+    </script>
 </body>
 </html>
