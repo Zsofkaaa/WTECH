@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+
+
 class Product extends Model
 {
     protected $fillable = [
@@ -13,10 +15,14 @@ class Product extends Model
         'is_new', 'is_best_seller', 'is_discounted'
     ];
 
+
+
     public function images()
     {
         return $this->hasMany(ProductImage::class);
     }
+
+
 
     public function getMainImagePath()
     {
