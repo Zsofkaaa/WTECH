@@ -32,6 +32,39 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            // 1. A session-beli kosár
+            $sessionCart = session()->get('cart', []);
+
+            // 2. Adatbázisból lekérjük a meglévő kosarat
+            $dbCart = \App\Models\Cart::where('user_id', $user->id)->first();
+
+            if ($dbCart) {
+                $dbItems = json_decode($dbCart->items, true);
+
+                // 3. Egyesítjük: ha van átfedés, növeljük a mennyiséget
+                foreach ($sessionCart as $productId => $item) {
+                    if (isset($dbItems[$productId])) {
+                        $dbItems[$productId]['quantity'] += $item['quantity'];
+                    } else {
+                        $dbItems[$productId] = $item;
+                    }
+                }
+            } else {
+                // Ha még nincs kosár, akkor a session-öst mentjük el
+                $dbItems = $sessionCart;
+            }
+
+            // 4. Mentés adatbázisba
+            \App\Models\Cart::updateOrCreate(
+                ['user_id' => $user->id],
+                ['items' => json_encode($dbItems)]
+            );
+
+            // 5. Kosár frissítése a session-ben
+            session(['cart' => $dbItems]);
+
             return redirect()->route('dakujeme', ['source' => 'login']);
         }
 
@@ -50,5 +83,14 @@ class AuthController extends Controller
 
         return redirect('/')->with('success', 'Váš účet bol úspešne vymazaný.');
     }
+
+    public function logout()
+{
+    // Ha a session-ban van kosár, töröljük
+    session()->forget('cart');
+    
+    Auth::logout();
+    return redirect('/');
+}
 
 }

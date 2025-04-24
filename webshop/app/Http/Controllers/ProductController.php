@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;  
 
 
 class ProductController extends Controller
@@ -40,20 +41,48 @@ class ProductController extends Controller
     public function addToCart($id)
     {
         $product = Product::findOrFail($id);
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+        
+        // Ha nincs bejelentkezve, a kosarat a session-ban tároljuk
+        if (!Auth::check()) {
+            $cart = session()->get('cart', []);
+            if (isset($cart[$id])) {
+                $cart[$id]['quantity']++;
+            } else {
+                $cart[$id] = [
+                    "name" => $product->name,
+                    "quantity" => 1,
+                    "price" => $product->price,
+                    "image" => $product->images->first()->filename ?? 'placeholder.jpg'
+                ];
+            }
+            session()->put('cart', $cart);
         } else {
-            $cart[$id] = [
-                "name" => $product->name,
-                "quantity" => 1,
-                "price" => $product->price,
-                "image" => $product->images->first()->filename ?? 'placeholder.jpg'
-            ];
-        }
+            // Ha be vagy jelentkezve, az adatbázisba mentjük a kosarat
+            $cart = \App\Models\Cart::where('user_id', auth()->id())->first();
+            if ($cart) {
+                $cartItems = json_decode($cart->items, true);
+            } else {
+                $cartItems = [];
+            }
 
-        session()->put('cart', $cart);
+            // Hozzáadjuk a terméket a kosárhoz
+            if (isset($cartItems[$id])) {
+                $cartItems[$id]['quantity']++;
+            } else {
+                $cartItems[$id] = [
+                    'name' => $product->name,
+                    'quantity' => 1,
+                    'price' => $product->price,
+                    'image' => $product->images->first()->filename ?? 'placeholder.jpg'
+                ];
+            }
+
+            // Frissítjük vagy létrehozzuk a kosarat
+            \App\Models\Cart::updateOrCreate(
+                ['user_id' => auth()->id()],
+                ['items' => json_encode($cartItems)]
+            );
+        }
 
         return redirect()->back();
     }
@@ -72,6 +101,7 @@ class ProductController extends Controller
         $cart = session()->get('cart', []);
         unset($cart[$id]);
         session()->put('cart', $cart);
+        $this->saveCartToDatabase(); 
         return redirect()->back();
     }
 
@@ -88,6 +118,16 @@ class ProductController extends Controller
         }
 
         session()->put('cart', $cart);
+        $this->saveCartToDatabase(); 
         return redirect()->back();
     }
+    private function saveCartToDatabase()
+    {
+        if (auth()->check()) {
+            \App\Models\Cart::updateOrCreate(
+                ['user_id' => auth()->id()],
+                ['items' => json_encode(session('cart', []))]
+            );
+        }
+    }   
 }
