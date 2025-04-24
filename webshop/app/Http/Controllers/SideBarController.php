@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 
-
-
 class SideBarController extends Controller
 {
     public function showCategory(Request $request, $category)
@@ -30,9 +28,24 @@ class SideBarController extends Controller
             abort(404);
         }
 
+        // Szűrők
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
         $sort = $request->input('sort', 'default');
+
+        // Termékek lekérdezése
         $productsQuery = $category->products()->with(['images' => fn($query) => $query->orderBy('filename')]);
 
+        // Ár szűrés
+        if (!is_null($minPrice)) {
+            $productsQuery->where('price', '>=', $minPrice);
+        }
+
+        if (!is_null($maxPrice)) {
+            $productsQuery->where('price', '<=', $maxPrice);
+        }
+
+        // Rendezés
         switch ($sort) {
             case 'price_asc':
                 $productsQuery->orderBy('price', 'asc');
@@ -51,7 +64,7 @@ class SideBarController extends Controller
                 break;
         }
 
-        $products = $productsQuery->paginate(12);
+        $products = $productsQuery->paginate(12)->appends($request->query()); // Megőrzi query paramétereket a lapozásnál
 
         return view('shop', [
             'products' => $products,
