@@ -6,7 +6,7 @@
     <title>Platba</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/platba.css') }}" rel="stylesheet">
-    
+
 </head>
 
 
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="mt-3 d-flex justify-content-center">
-                            
+
                             <button onclick="submitPayment()" class="btn btn-dark btn-narrow">Dokončenie objednávky</button>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    
+
     @include('partials.footer')
 
     <script>
@@ -65,8 +65,8 @@
             document.getElementById('radio-cash').classList.remove('selected');
             document.getElementById(`radio-${option}`).classList.add('selected');
         }
-    </script>    
-    <script src="{{ asset('js/platba.js') }}"></script>    
+    </script>
+    <script src="{{ asset('js/platba.js') }}"></script>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

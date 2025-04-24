@@ -8,27 +8,43 @@
     <link href="{{ asset('css/detailyoprodukte.css') }}" rel="stylesheet">
 </head>
 
+@php
+    use Illuminate\Support\Str;
+    $slug = Str::slug($product->name);
+@endphp
+
 <script src="{{ asset('js/detaily.js') }}"></script>
+
 <body>
     @include('partials.header')
 
     <div class="container product-container">
         <div class="row align-items-center">
             <div class="col-md-6 d-flex justify-content-center">
-                <div class="product-image-wrapper">
-                    <button class="arrow-button left-arrow" onclick="changeImage(-1)">&#10094;</button>
+                <div class="product-image-wrapper position-relative">
+                    <button class="arrow-button left-arrow position-absolute top-50 start-0 translate-middle-y" onclick="changeImage(-1)">&#10094;</button>
                     <div class="product-image" id="productImage">
-                        <img id="activeImage"
-                             src="{{ asset('Pictures/' . $product->slug . '1.jpg') }}"
-                             alt="{{ $product->name }}"
-                             style="width: 100%; height: 100%; object-fit: cover;">
+                        <img
+                            id="activeImage"
+                            src="{{ asset('Pictures/' . $slug . '1.jpg') }}"
+                            alt="{{ $product->name }}"
+                            data-basename="{{ $slug }}"
+                            data-imagefolder="{{ asset('Pictures') . '/' }}"
+                            style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
-                    <button class="arrow-button right-arrow" onclick="changeImage(1)">&#10095;</button>
+                    <button class="arrow-button right-arrow position-absolute top-50 end-0 translate-middle-y" onclick="changeImage(1)">&#10095;</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <h2>{{ $product->name }}</h2>
-                <p>{{ $product->price }} €</p>
+                <p class="price">
+                    @if ($product->is_discounted && $product->discounted_price)
+                        <span class="text-decoration-line-through text-muted">{{ number_format($product->price, 2) }} €</span>
+                        <span class="text-success fw-bold ms-2">{{ number_format($product->discounted_price, 2) }} €</span>
+                    @else
+                        <span>{{ number_format($product->price, 2) }} €</span>
+                    @endif
+                </p>
                 <div class="d-flex align-items-center gap-2 mt-2">
                     <!-- Pridať do košíka -->
                     <form action="{{ route('cart.add', ['id' => $product->id]) }}" method="POST">
@@ -58,5 +74,7 @@
     @include('partials.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/detaily.js') }}"></script>
 </body>
 </html>
+

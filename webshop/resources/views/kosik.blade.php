@@ -39,7 +39,18 @@
                             <button class="btn btn-sm btn-secondary">+</button>
                         </form>
 
-                        <div class="price mx-2">{{ $item['price'] * $item['quantity'] }}€</div>
+                        <div class="price mx-2">
+                            @if (!empty($item['is_discounted']) && $item['is_discounted'])
+                                <span class="text-decoration-line-through text-muted">
+                                    {{ number_format($item['original_price'] * $item['quantity'], 2) }} €
+                                </span>
+                                <span class="text-success fw-bold ms-2">
+                                    {{ number_format($item['price'] * $item['quantity'], 2) }} €
+                                </span>
+                            @else
+                                {{ number_format($item['price'] * $item['quantity'], 2) }} €
+                            @endif
+                        </div>
 
                         <!-- Törlés gomb -->
                         <form action="{{ route('cart.remove', ['id' => $id]) }}" method="POST" class="d-inline">

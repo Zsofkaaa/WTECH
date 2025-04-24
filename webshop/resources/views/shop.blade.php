@@ -8,54 +8,60 @@
     <link href="{{ asset('css/shop.css') }}" rel="stylesheet">
 </head>
 
-
-
 <body>
     @include('partials.header')
 
     <div class="container-fluid mt-4">
         <div class="row">
-
             @include('partials.sidebar')
 
-          <section class="col">
-            <div style="text-align: center; align-items: center; justify-content: center;">
-                <div style="font-size: xx-large;">{{ $categoryTitle }}</div>
-            </div>
-            <div class="d-flex justify-content-between align-items-center mb-3 px-3">
-                <button class="btn btn-outline-secondary">Zoradiť</button>
-                <button class="btn btn-outline-secondary">Filter</button>
-            </div>
-            <div class="container pt-1">
-                <div class="row">
-                    @foreach ($products as $product)
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                        <a href="{{ route('product.show', $product->id) }}" class="text-decoration-none text-dark">
-                            <div class="product-card">
-                                <form action="{{ route('product.favorite', $product->id) }}" method="POST">
-                                    @csrf
-                                    <button class="heart-icon" type="submit">❤️</button>
-                                </form>
-                                <div class="product-image">
-                                    <img src="{{ asset('Pictures/' . $product->images->first()->filename) }}" alt="{{ $product->name }}">
-                                </div>
-                                <div class="product-details">
-                                    <h5>{{ $product->name }}</h5>
-                                    <p>Cena: {{ $product->price }}€</p>
-                                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
-                                        @csrf
-                                        <button class="btn btn-primary" type="submit">Pridať do košíka</button>
-                                    </form>
-                                </div>
+            <section class="col">
+                <div style="text-align: center; align-items: center; justify-content: center;">
+                    <div style="font-size: xx-large;">{{ $categoryTitle ?? 'Shop' }}</div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3 px-3">
+                    <button class="btn btn-outline-secondary">Zoradiť</button>
+                    <button class="btn btn-outline-secondary">Filter</button>
+                </div>
+                <div class="container pt-1">
+                    <div class="row">
+                        @foreach ($products as $product)
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                                <a href="{{ route('product.show', $product->id) }}" class="text-decoration-none text-dark">
+                                    <div class="product-card">
+                                        <form action="{{ route('product.favorite', $product->id) }}" method="POST">
+                                            @csrf
+                                            <button class="heart-icon" type="submit">❤️</button>
+                                        </form>
+                                        <div class="product-image">
+                                            <img src="{{ asset('Pictures/' . $product->images->first()->filename) }}" alt="{{ $product->name }}">
+                                        </div>
+                                        <div class="product-details">
+                                            <h5>{{ $product->name }}</h5>
+                                            <p>
+                                                @if($product->is_discounted && $product->discounted_price)
+                                                    <span class="text-decoration-line-through text-muted">{{ number_format($product->price, 2) }}€</span>
+                                                    <span class="text-success fw-bold ms-2">{{ number_format($product->discounted_price, 2) }}€</span>
+                                                @else
+                                                    <span>{{ number_format($product->price, 2) }}€</span>
+                                                @endif
+                                            </p>
+                                            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-primary" type="submit">Pridať do košíka</button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </a>
                             </div>
-                        </a>
+                        @endforeach
                     </div>
-                    @endforeach
+                    <div class="pagination-container">
+                        {{ $products->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
-                <div class="pagination-container">
-                    {{ $products->links('pagination::bootstrap-5') }}
-                </div>
-            </div>
+            </section>
         </div>
     </div>
 
