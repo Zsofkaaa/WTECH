@@ -15,12 +15,15 @@
 
 <script src="{{ asset('js/detaily.js') }}"></script>
 
+
+
 <body>
     @include('partials.header')
 
     <div class="container product-container">
         <div class="row align-items-center">
             <div class="col-md-6 d-flex justify-content-center">
+
                 <div class="product-image-wrapper position-relative">
                     <button class="arrow-button left-arrow position-absolute top-50 start-0 translate-middle-y" onclick="changeImage(-1)">&#10094;</button>
                     <div class="product-image" id="productImage">
@@ -33,19 +36,23 @@
                             style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <button class="arrow-button right-arrow position-absolute top-50 end-0 translate-middle-y" onclick="changeImage(1)">&#10095;</button>
+
                 </div>
             </div>
             <div class="col-md-6">
                 <h2>{{ $product->name }}</h2>
                 <p class="price">
+
                     @if ($product->is_discounted && $product->discounted_price)
                         <span class="text-decoration-line-through text-muted">{{ number_format($product->price, 2) }} €</span>
                         <span class="text-success fw-bold ms-2">{{ number_format($product->discounted_price, 2) }} €</span>
                     @else
                         <span>{{ number_format($product->price, 2) }} €</span>
                     @endif
+
                 </p>
                 <div class="d-flex align-items-center gap-2 mt-2">
+
                     @if ($isInCart)
                     <form action="{{ route('cart.remove', ['id' => $product->id]) }}" method="POST">
                         @csrf
@@ -64,6 +71,7 @@
                             {{ $product->is_favorite ? '💔' : '❤️' }}
                         </button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -80,5 +88,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/detaily.js') }}"></script>
+
 </body>
 </html>
+
