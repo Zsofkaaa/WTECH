@@ -11,102 +11,171 @@ class NavBarController extends Controller
 {
     public function showAkcie(Request $request)
     {
-        $sort = $request->query('sort', 'asc');
+        $sort = $request->query('sort', 'default');
+        $minPrice = $request->query('min_price');
+        $maxPrice = $request->query('max_price');
+
         $products = Product::where('is_discounted', true)
             ->with(['images' => fn($query) => $query->orderBy('filename')]);
 
-        if ($sort === 'price_asc') {
-            $products = $products->orderBy('price', 'asc');
-        } elseif ($sort === 'price_desc') {
-            $products = $products->orderBy('price', 'desc');
-        } elseif ($sort === 'desc') {
-            $products = $products->orderBy('name', 'desc');
-        } else {
-            $products = $products->orderBy('name', 'asc');
+        if (!is_null($minPrice)) {
+            $products->whereRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) >= ?', [$minPrice]);
         }
 
-        $products = $products->paginate(12);
+        if (!is_null($maxPrice)) {
+            $products->whereRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) <= ?', [$maxPrice]);
+        }
+
+        switch ($sort) {
+            case 'price_asc':
+                $products->orderByRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) ASC');
+                break;
+            case 'price_desc':
+                $products->orderByRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) DESC');
+                break;
+            case 'name_desc':
+                $products->orderBy('name', 'desc');
+                break;
+            case 'name_asc':
+            default:
+                $products->orderBy('name', 'asc');
+                break;
+        }
+
+        $products = $products->paginate(12)->appends($request->query());
 
         return view('shop', [
             'products' => $products,
             'categoryTitle' => 'Akcie',
+            'sort' => $sort,
         ]);
     }
+
 
 
 
     public function showNovinky(Request $request)
     {
-        $sort = $request->query('sort', 'asc');
+        $sort = $request->query('sort', 'default');
+        $minPrice = $request->query('min_price');
+        $maxPrice = $request->query('max_price');
 
         $products = Product::where('is_new', true)
             ->with(['images' => fn($query) => $query->orderBy('filename')]);
 
-        if ($sort === 'price_asc') {
-            $products = $products->orderBy('price', 'asc');
-        } elseif ($sort === 'price_desc') {
-            $products = $products->orderBy('price', 'desc');
-        } elseif ($sort === 'desc') {
-            $products = $products->orderBy('name', 'desc');
-        } else {
-            $products = $products->orderBy('name', 'asc');
+        if (!is_null($minPrice)) {
+            $products->where('price', '>=', $minPrice);
         }
 
-        $products = $products->paginate(12);
+        if (!is_null($maxPrice)) {
+            $products->where('price', '<=', $maxPrice);
+        }
+
+        switch ($sort) {
+            case 'price_asc':
+                $products->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $products->orderBy('price', 'desc');
+                break;
+            case 'name_desc':
+                $products->orderBy('name', 'desc');
+                break;
+            case 'name_asc':
+            default:
+                $products->orderBy('name', 'asc');
+                break;
+        }
+
+        $products = $products->paginate(12)->appends($request->query());
 
         return view('shop', [
             'products' => $products,
             'categoryTitle' => 'Novinky',
+            'sort' => $sort,
         ]);
     }
+
 
 
 
     public function showBestSellers(Request $request)
     {
-        $sort = $request->query('sort', 'asc');
+        $sort = $request->query('sort', 'default');
+        $minPrice = $request->query('min_price');
+        $maxPrice = $request->query('max_price');
 
         $products = Product::where('is_best_seller', true)
             ->with(['images' => fn($query) => $query->orderBy('filename')]);
 
-        if ($sort === 'price_asc') {
-            $products = $products->orderBy('price', 'asc');
-        } elseif ($sort === 'price_desc') {
-            $products = $products->orderBy('price', 'desc');
-        } elseif ($sort === 'desc') {
-            $products = $products->orderBy('name', 'desc');
-        } else {
-            $products = $products->orderBy('name', 'asc');
+        if (!is_null($minPrice)) {
+            $products->where('price', '>=', $minPrice);
         }
 
-        $products = $products->paginate(12);
+        if (!is_null($maxPrice)) {
+            $products->where('price', '<=', $maxPrice);
+        }
+
+        switch ($sort) {
+            case 'price_asc':
+                $products->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $products->orderBy('price', 'desc');
+                break;
+            case 'name_desc':
+                $products->orderBy('name', 'desc');
+                break;
+            case 'name_asc':
+            default:
+                $products->orderBy('name', 'asc');
+                break;
+        }
+
+        $products = $products->paginate(12)->appends($request->query());
 
         return view('shop', [
             'products' => $products,
             'categoryTitle' => 'Best sellers',
+            'sort' => $sort,
         ]);
     }
 
 
-
     public function showOblubene(Request $request)
     {
-        $sort = $request->query('sort', 'asc');
+        $sort = $request->query('sort', 'default');
+        $minPrice = $request->query('min_price');
+        $maxPrice = $request->query('max_price');
 
         $products = Product::where('is_favorite', true)
             ->with(['images' => fn($query) => $query->orderBy('filename')]);
 
-        if ($sort === 'price_asc') {
-            $products = $products->orderBy('price', 'asc');
-        } elseif ($sort === 'price_desc') {
-            $products = $products->orderBy('price', 'desc');
-        } elseif ($sort === 'desc') {
-            $products = $products->orderBy('name', 'desc');
-        } else {
-            $products = $products->orderBy('name', 'asc');
-        }
+            if (!is_null($minPrice)) {
+                $products->whereRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) >= ?', [$minPrice]);
+            }
 
-        $products = $products->paginate(12);
+            if (!is_null($maxPrice)) {
+                $products->whereRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) <= ?', [$maxPrice]);
+            }
+
+            switch ($sort) {
+                case 'price_asc':
+                    $products->orderByRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) ASC');
+                    break;
+                case 'price_desc':
+                    $products->orderByRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) DESC');
+                    break;
+                case 'name_desc':
+                    $products->orderBy('name', 'desc');
+                    break;
+                case 'name_asc':
+                default:
+                    $products->orderBy('name', 'asc');
+                    break;
+            }
+
+        $products = $products->paginate(12)->appends($request->query());
 
         return view('shop', [
             'products' => $products,

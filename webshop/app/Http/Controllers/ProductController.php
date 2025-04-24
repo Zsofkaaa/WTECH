@@ -29,22 +29,18 @@ class ProductController extends Controller
         $sort = $request->query('sort', 'asc');
         $minPrice = $request->query('min_price');
         $maxPrice = $request->query('max_price');
-
         $query = Product::query();
 
         if ($category) {
             $query->where('category', $category);
         }
 
-        // Eager load képekhez
         $query->with('images');
-
         $products = $query->get()->filter(function ($product) use ($minPrice, $maxPrice) {
             $effectivePrice = $product->is_discounted && $product->discounted_price
                 ? $product->discounted_price
                 : $product->price;
 
-            // Ár szűrés alkalmazása
             if ($minPrice !== null && $effectivePrice < $minPrice) {
                 return false;
             }
@@ -52,12 +48,10 @@ class ProductController extends Controller
                 return false;
             }
 
-            // Beállítjuk a szűrt ár a modelben
             $product->effective_price = $effectivePrice;
             return true;
         });
 
-        // Rendezes
         if ($sort === 'price_asc') {
             $products = $products->sortBy('effective_price')->values();
         } elseif ($sort === 'price_desc') {
@@ -68,7 +62,6 @@ class ProductController extends Controller
             $products = $products->sortBy('name')->values();
         }
 
-        // Manuális lapozás, mivel collection-t szűrünk és rendezzünk
         $perPage = 12;
         $page = $request->input('page', 1);
         $pagedItems = $products->slice(($page - 1) * $perPage, $perPage)->values();
