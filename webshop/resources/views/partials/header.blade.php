@@ -7,6 +7,7 @@
                     <input type="text" name="query" class="search-bar w-100" placeholder="Zadajte, čo hľadáte...">
                 </form>
                 <div>
+
                     @if(auth()->check())
                         <form action="{{ route('profil.zmazat') }}" method="POST" onsubmit="return confirm('Naozaj chcete vymazať svoj účet?');" class="d-inline-block ms-2">
                             @csrf
@@ -14,6 +15,7 @@
                             <button type="submit" class="btn btn-outline-danger">Vymazať účet</button>
                         </form>
                     @endif
+
                     @if(Auth::check())
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf
@@ -22,10 +24,12 @@
                     @else
                         <button class="btn btn-outline-primary" onclick="window.location.href='/prihlasenie'">Prihlásenie/Registrácia</button>
                     @endif
+
                     <button class="btn btn-outline-danger" onclick="window.location.href='/shop/oblubene'">❤️</button>
                     <button class="btn btn-outline-dark" onclick="window.location.href='/kosik'">🛒</button>
                 </div>
             </div>
+
             <div class="d-flex justify-content-center">
                 <button class="btn btn-light mx-1" onclick="window.location.href='/'">🏠</button>
                 <button class="btn btn-light mx-1" onclick="window.location.href='/shop/akcie'">Akcie</button>
@@ -33,6 +37,7 @@
                 <button class="btn btn-light mx-1" onclick="window.location.href='/shop'">Shop</button>
                 <button class="btn btn-light mx-1" onclick="window.location.href='/shop/best-sellers'">Best sellers</button>
             </div>
+
         </div>
     </div>
 </nav>
