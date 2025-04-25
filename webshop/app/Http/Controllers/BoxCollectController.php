@@ -16,7 +16,6 @@ class BoxCollectController extends Controller
     }
 
 
-
     public function submitForm(Request $request)
     {
         $validated = $request->validate([
