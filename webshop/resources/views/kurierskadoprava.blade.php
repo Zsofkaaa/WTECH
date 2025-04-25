@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <form class="row g-3 mt-4">
+        <form id="shipping-form" class="row g-3 mt-4">
             <div class="col-md-6">
                 <label class="form-label">Meno a priezvisko</label>
                 <input type="text" class="form-control" id="full-name" required pattern="^[A-ZÁÉÍÓÚÝŔĽŇŽŠČĎŤÄÖÜ][a-záéíóúýŕľňžščďťäöü]+( [A-ZÁÉÍÓÚÝŔĽŇŽŠČĎŤÄÖÜ][a-záéíóúýŕľňžščďťäöü]+)+$">
@@ -65,7 +65,7 @@
             </div>
 
         </form>
-        <button id="next-button" class="btn btn-dark mt-3">Ďalej na platbu</button>
+        <button id="next-button" type="click" class="btn btn-dark mt-3">Ďalej na platbu</button>
     </div>
 
     @include('partials.footer')
