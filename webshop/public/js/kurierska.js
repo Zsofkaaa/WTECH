@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form');
+    const form = document.querySelector('#shipping-form');
     const inputs = form.querySelectorAll('input');
     const nextButton = document.getElementById('next-button');
 
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         nextButton.disabled = !isValid;
+        return isValid; 
     }
 
     inputs.forEach(input => {
@@ -35,12 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     nextButton.addEventListener('click', (e) => {
-        validateForm();
-        if (nextButton.disabled) {
-            e.preventDefault();
-            alert('Vyplňte správne všetky polia formulára.');
-        } else {
+        e.preventDefault();
+        if (validateForm()) {
             window.location.href = '/platba';
+            
+        } else {
+            alert('Vyplňte správne všetky polia formulára.');
         }
     });
 });
