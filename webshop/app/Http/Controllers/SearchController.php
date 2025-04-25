@@ -43,4 +43,7 @@ class SearchController extends Controller
             'categoryTitle' => $categoryTitle
         ]);
     }
+
 }
+
+
