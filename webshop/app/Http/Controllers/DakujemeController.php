@@ -13,7 +13,7 @@ class DakujemeController extends Controller
         $source = $request->query('source');
 
         $message = match($source) {
-            'login' => 'Ste prihlásený!',
+            'login' => 'Potvrdená akcia!',
             'register' => 'Ďakujeme za registráciu!',
             'registracia' => 'Ďakujeme za registráciu!',
             default => 'Ďakujeme za Váš nákup!',

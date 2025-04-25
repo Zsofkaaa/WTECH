@@ -47,12 +47,12 @@ class SideBarController extends Controller
 
         // Életkor szűrés
         if (!is_null($maxAge)) {
-            $productsQuery->where('min_age', '<=', $maxAge);
+            $productsQuery->where('min_age', '>=', $maxAge);
         }
 
         // Játékosszám szűrés
         if (!is_null($players)) {
-            $productsQuery->where('max_players', '>=', $players);
+            $productsQuery->where('max_players', '<=', $players);
         }
 
         // Rendezés

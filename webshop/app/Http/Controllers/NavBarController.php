@@ -27,11 +27,11 @@ class NavBarController extends Controller
         }
 
         if (!is_null($maxAge)) {
-            $products->where('max_age', '<=', $maxAge);
+            $products->where('min_age', '>=', $maxAge);
         }
 
         if (!is_null($players)) {
-            $products->where('max_players', '>=', $players);
+            $products->where('max_players', '<=', $players);
         }
 
         switch ($sort) {
@@ -82,11 +82,11 @@ class NavBarController extends Controller
         }
 
         if (!is_null($maxAge)) {
-            $products->where('min_age', '<=', $maxAge);
+            $products->where('min_age', '>=', $maxAge);
         }
 
         if (!is_null($players)) {
-            $products->where('max_players', '>=', $players);
+            $products->where('max_players', '<=', $players);
         }
 
         switch ($sort) {
@@ -112,6 +112,7 @@ class NavBarController extends Controller
             'categoryTitle' => 'Novinky',
             'sort' => $sort,
             'vekova_kategoria' => $maxAge,
+            'hracov' => $players,
         ]);
     }
 
@@ -135,11 +136,11 @@ class NavBarController extends Controller
         }
 
         if (!is_null($maxAge)) {
-            $products->where('min_age', '<=', $maxAge);
+            $products->where('min_age', '>=', $maxAge);
         }
 
         if (!is_null($players)) {
-            $products->where('max_players', '>=', $players);
+            $products->where('max_players', '<=', $players);
         }
 
         switch ($sort) {
@@ -165,6 +166,7 @@ class NavBarController extends Controller
             'categoryTitle' => 'Best sellers',
             'sort' => $sort,
             'vekova_kategoria' => $maxAge,
+            'hracov' => $players,
         ]);
     }
 
@@ -188,11 +190,11 @@ class NavBarController extends Controller
         }
 
         if (!is_null($maxAge)) {
-            $products->where('min_age', '<=', $maxAge);
+            $products->where('min_age', '>=', $maxAge);
         }
 
         if (!is_null($players)) {
-            $products->where('max_players', '>=', $players);
+            $products->where('max_players', '<=', $players);
         }
 
         switch ($sort) {
@@ -218,6 +220,7 @@ class NavBarController extends Controller
             'categoryTitle' => 'Tvoje obľúbené produkty',
             'sort' => $sort,
             'vekova_kategoria' => $maxAge,
+            'hracov' => $players,
         ]);
     }
 }
