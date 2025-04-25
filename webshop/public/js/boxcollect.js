@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 input.classList.add('is-valid');
             }
         });
+        
 
         const boxSelect = form.querySelector('select[name="box_id"]');
         if (!boxSelect.value) {
