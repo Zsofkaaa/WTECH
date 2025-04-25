@@ -116,6 +116,7 @@ class NavBarController extends Controller
         ]);
     }
 
+    
     public function showBestSellers(Request $request)
     {
         $sort = $request->query('sort', 'default');
