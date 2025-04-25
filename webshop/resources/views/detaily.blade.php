@@ -16,7 +16,6 @@
 <script src="{{ asset('js/detaily.js') }}"></script>
 
 
-
 <body>
     @include('partials.header')
 
