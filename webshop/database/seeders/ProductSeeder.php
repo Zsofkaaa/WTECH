@@ -117,7 +117,7 @@ class ProductSeeder extends Seeder
             'min_players' => 2,
             'max_players' => 6,
             'categories' => ['rodinne', 'pamat', 'vedomostne'],
-        ],
+            ],
             ['name' => 'Desiatka', 'price' => 20.50, 'is_new' => true,
             'description' => '
                 <p><strong>Desiatka</strong> – Hra, kde čakanie neexistuje!</p>
@@ -133,7 +133,7 @@ class ProductSeeder extends Seeder
             'min_players' => 2,
             'max_players' => 6,
             'categories' => ['rodinne', 'vedomostne', 'party'],      
-        ],
+            ],
             ['name' => 'Dixit', 'price' => 19.99, 'is_best_seller' => true,
             'description' => '
                 <p><strong>Dixit</strong> – Kúzlo predstavivosti!</p>
@@ -146,7 +146,7 @@ class ProductSeeder extends Seeder
             'min_players' => 3,
             'max_players' => 8,
             'categories' => ['rodinne', 'party'],
-        ],
+            ],
             ['name' => 'Dobble', 'price' => 6.50, 'is_new' => true,
             'description' => '
                 <p><strong>Dobble</strong> – Šialená hra rýchlosti a postrehu!</p>
@@ -164,7 +164,7 @@ class ProductSeeder extends Seeder
             'min_players' => 2,
             'max_players' => 8,
             'categories' => ['rodinne', 'karty', 'deti'],
-        ],
+            ],
             ['name' => 'Domino', 'price' => 4.99, 'is_discounted' => true, 'discounted_price' => 3.99,
             'description' => '
                 <p><strong>Domino</strong> – Klasická stratégia s číselnými kameňmi!</p>
@@ -176,7 +176,7 @@ class ProductSeeder extends Seeder
             'min_players' => 2,
             'max_players' => 4,
             'categories' => ['strategia'],    
-        ],
+            ],
             ['name' => 'Exploding Kittens', 'price' => 24.99, 'is_best_seller' => true,
             'description' => '
                 <p><strong>Exploding Kittens: Dobro vs. Zlo</strong> – kde mačky a výbuchy spájajú zábavu s nevypočitateľným chaosom!</p>
@@ -189,7 +189,7 @@ class ProductSeeder extends Seeder
             'min_players' => 2,
             'max_players' => 5,
             'categories' => ['party', 'karty'],
-        ],
+            ],
             ['name' => 'Fabio', 'price' => 9.50, 'is_new' => true,
             'description' => '
                 <p><strong>Žaba - trojvrstvové puzzle</strong> rozpráva vývojový príbeh žabky: od vajíčka cez mláďa po dospelú žabu. Každá vrstva zobrazuje inú životnú fázu v tom istom prostredí.</p>
@@ -199,7 +199,7 @@ class ProductSeeder extends Seeder
             'min_players' => 1,
             'max_players' => 1,
             'categories' => ['deti', 'puzzle'],
-        ],
+            ],
             ['name' => 'Iq Link', 'price' => 11.99, 'is_best_seller' => true,
             'description' => '
                 <p><strong>IQ Link</strong> je logická výzva v kapse! Táto geniálna hra testuje vaše priestorové myslenie. Cieľ: správne poskladať 36 dielikov na 24 miest pomocou ich prepojenia (krúžok a gulička sa môžu zlúčiť!).</p>
@@ -209,7 +209,7 @@ class ProductSeeder extends Seeder
             'min_players' => 1,
             'max_players' => 1,
             'categories' => ['strategia', 'deti'],    
-        ],
+            ],
             ['name' => 'Jenga', 'price' => 8.50, 'is_new' => true,
             'description' => '
                 <p><strong>Jenga</strong> je napínavá hra zručnosti a trpezlivosti! Klasická hra, kde hráči striedavo vytŕhajú drevený kameň z veže a ukladajú ich navrch. Cieľom je nezhodiť vežu – ten, kto spôsobí pád, prehráva!</p>
@@ -221,7 +221,7 @@ class ProductSeeder extends Seeder
             'min_players' => 2,
             'max_players' => 8,
             'categories' => ['party', 'rodinne'],
-        ],
+            ],
             ['name' => 'Meme', 'price' => 30.00, 'is_discounted' => true, 'discounted_price' => 25.00,
             'description' => '
                 <p><strong>What Do You Meme?</strong> je zábavná spoločenská hra, ktorá testuje váš zmysel pre humor. Princíp je jednoduchý: kombinujete obrázkové karty s textovými a vytvárate čo najvtipnejšie memes. V každom kole iný hráč rozhoduje, ktorá kombinácia zvíťazí.</p>
@@ -231,7 +231,7 @@ class ProductSeeder extends Seeder
             'min_players' => 3,
             'max_players' => 20,
             'categories' => ['karty', 'party'],
-        ],
+            ],
             ['name' => 'Monopoly', 'price' => 40.00, 'is_best_seller' => true,
             'description' => '
                 <p><strong>Monopoly: Chudák</strong> je unikátna verzia klasickej hry Monopoly, kde sa vyplatí byť „chudák“! Cieľom je získať špeciálne mince útěchy, ktoré môžete vymeniť za výhody – čím viac strácate, tým lepšie bonusy získavate.</p>
@@ -247,7 +247,7 @@ class ProductSeeder extends Seeder
             'min_players' => 2,
             'max_players' => 6,
             'categories' => ['strategia', 'rodinne'],
-        ],
+            ],
             ['name' => 'Pexesohm', 'price' => 7.50, 'is_new' => true,
             'description' => '
                 <p><strong>Vedomostné pexeso – Hlavné mestá sveta</strong> je klasické pexeso s twistom! Namiesto obrázkov spájate hlavné mesto s príslušným štátom. Základné pravidlá ostávajú – hľadáte dvojice, ale tentoraz s prídavkom vzdelávania.</p>
