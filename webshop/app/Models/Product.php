@@ -27,11 +27,13 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
+
     public function getMainImagePath()
     {
         return asset('Pictures/' . Str::slug($this->name) . '1.jpg');
     }
 
+    
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_product');
