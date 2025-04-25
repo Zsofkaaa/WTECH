@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         nextButton.disabled = !isValid;
-        return isValid; 
+        return isValid;
     }
 
     inputs.forEach(input => {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         if (validateForm()) {
             window.location.href = '/platba';
-            
+
         } else {
             alert('Vyplňte správne všetky polia formulára.');
         }
