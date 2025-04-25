@@ -22,5 +22,4 @@ class OrderController extends Controller
 
         return redirect()->route('dakujeme', ['source' => 'login']);
     }
-
 }
