@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
+
+
 class NavBarController extends Controller
 {
     public function showAkcie(Request $request)
@@ -27,11 +29,11 @@ class NavBarController extends Controller
         }
 
         if (!is_null($maxAge)) {
-            $products->where('min_age', '>=', $maxAge);
+            $products->where('min_age', '<=', $maxAge);
         }
 
         if (!is_null($players)) {
-            $products->where('max_players', '<=', $players);
+            $products->where('max_players', '>=', $players);
         }
 
         switch ($sort) {
@@ -41,10 +43,10 @@ class NavBarController extends Controller
             case 'price_desc':
                 $products->orderByRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) DESC');
                 break;
-            case 'name_desc':
+            case 'desc':
                 $products->orderBy('name', 'desc');
                 break;
-            case 'name_asc':
+            case 'asc':
             default:
                 $products->orderBy('name', 'asc');
                 break;
@@ -82,11 +84,11 @@ class NavBarController extends Controller
         }
 
         if (!is_null($maxAge)) {
-            $products->where('min_age', '>=', $maxAge);
+            $products->where('min_age', '<=', $maxAge);
         }
 
         if (!is_null($players)) {
-            $products->where('max_players', '<=', $players);
+            $products->where('max_players', '>=', $players);
         }
 
         switch ($sort) {
@@ -96,10 +98,10 @@ class NavBarController extends Controller
             case 'price_desc':
                 $products->orderBy('price', 'desc');
                 break;
-            case 'name_desc':
+            case 'desc':
                 $products->orderBy('name', 'desc');
                 break;
-            case 'name_asc':
+            case 'asc':
             default:
                 $products->orderBy('name', 'asc');
                 break;
@@ -116,7 +118,6 @@ class NavBarController extends Controller
         ]);
     }
 
-    
     public function showBestSellers(Request $request)
     {
         $sort = $request->query('sort', 'default');
@@ -137,11 +138,11 @@ class NavBarController extends Controller
         }
 
         if (!is_null($maxAge)) {
-            $products->where('min_age', '>=', $maxAge);
+            $products->where('min_age', '<=', $maxAge);
         }
 
         if (!is_null($players)) {
-            $products->where('max_players', '<=', $players);
+            $products->where('max_players', '>=', $players);
         }
 
         switch ($sort) {
@@ -151,10 +152,10 @@ class NavBarController extends Controller
             case 'price_desc':
                 $products->orderBy('price', 'desc');
                 break;
-            case 'name_desc':
+            case 'desc':
                 $products->orderBy('name', 'desc');
                 break;
-            case 'name_asc':
+            case 'asc':
             default:
                 $products->orderBy('name', 'asc');
                 break;
@@ -191,11 +192,11 @@ class NavBarController extends Controller
         }
 
         if (!is_null($maxAge)) {
-            $products->where('min_age', '>=', $maxAge);
+            $products->where('min_age', '<=', $maxAge);
         }
 
         if (!is_null($players)) {
-            $products->where('max_players', '<=', $players);
+            $products->where('max_players', '>=', $players);
         }
 
         switch ($sort) {
@@ -205,10 +206,10 @@ class NavBarController extends Controller
             case 'price_desc':
                 $products->orderByRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) DESC');
                 break;
-            case 'name_desc':
+            case 'desc':
                 $products->orderBy('name', 'desc');
                 break;
-            case 'name_asc':
+            case 'asc':
             default:
                 $products->orderBy('name', 'asc');
                 break;

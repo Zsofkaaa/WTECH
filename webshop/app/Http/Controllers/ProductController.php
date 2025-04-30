@@ -38,24 +38,27 @@ class ProductController extends Controller
             $query->where('category', $category);
         }
 
-        
         if ($vekovaKategoria) {
-            $query->where('min_age', $vekovaKategoria);
+            $query->where('min_age', '<=', $vekovaKategoria);
         }
 
-        
         if ($pocetHracov) {
-            $query->where('max_players', $pocetHracov);
+            $query->where('max_players', '>=' ,$pocetHracov);
         }
-        
+
         $query->with('images');
+
+        if ($sort === 'desc') {
+            $query->orderBy('name', 'desc');
+        } elseif ($sort === 'asc') {
+            $query->orderBy('name', 'asc');
+        }
 
         $products = $query->get()->filter(function ($product) use ($minPrice, $maxPrice) {
             $effectivePrice = $product->is_discounted && $product->discounted_price
                 ? $product->discounted_price
                 : $product->price;
 
-            
             if ($minPrice !== null && $effectivePrice < $minPrice) {
                 return false;
             }
@@ -63,22 +66,15 @@ class ProductController extends Controller
                 return false;
             }
 
-            
             $product->effective_price = $effectivePrice;
             return true;
         });
 
-        
         if ($sort === 'price_asc') {
             $products = $products->sortBy('effective_price')->values();
         } elseif ($sort === 'price_desc') {
             $products = $products->sortByDesc('effective_price')->values();
-        } elseif ($sort === 'desc') {
-            $products = $products->sortByDesc('name')->values();
-        } else {
-            $products = $products->sortBy('name')->values();
         }
-
 
         $perPage = 12;
         $page = $request->input('page', 1);
@@ -97,7 +93,6 @@ class ProductController extends Controller
             'sort' => $sort
         ]);
     }
-
 
 
 
@@ -228,5 +223,4 @@ class ProductController extends Controller
 
         return false;
     }
-
 }

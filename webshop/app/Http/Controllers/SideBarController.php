@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 
+
+
 class SideBarController extends Controller
 {
     public function showCategory(Request $request, $categorySlug)
@@ -32,11 +34,10 @@ class SideBarController extends Controller
         $maxPrice = $request->input('max_price');
         $sort = $request->input('sort', 'default');
         $maxAge = $request->input('vekova_kategoria');
-        $players = $request->input('hracov'); 
+        $players = $request->input('hracov');
 
         $productsQuery = $category->products()->with(['images' => fn($query) => $query->orderBy('filename')]);
 
-        
         if (!is_null($minPrice)) {
             $productsQuery->whereRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) >= ?', [$minPrice]);
         }
@@ -45,16 +46,14 @@ class SideBarController extends Controller
             $productsQuery->whereRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) <= ?', [$maxPrice]);
         }
 
-    
         if (!is_null($maxAge)) {
-            $productsQuery->where('min_age', '>=', $maxAge);
+            $productsQuery->where('min_age', '<=', $maxAge);
         }
 
         if (!is_null($players)) {
-            $productsQuery->where('max_players', '<=', $players);
+            $productsQuery->where('max_players', '>=', $players);
         }
 
-        
         switch ($sort) {
             case 'price_asc':
                 $productsQuery->orderByRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) ASC');
@@ -62,14 +61,14 @@ class SideBarController extends Controller
             case 'price_desc':
                 $productsQuery->orderByRaw('(CASE WHEN discounted_price IS NOT NULL THEN discounted_price ELSE price END) DESC');
                 break;
-            case 'name_asc':
+            case 'asc':
                 $productsQuery->orderBy('name', 'asc');
                 break;
-            case 'name_desc':
+            case 'desc':
                 $productsQuery->orderBy('name', 'desc');
                 break;
             default:
-                $productsQuery->orderBy('created_at', 'desc');
+                $productsQuery->orderBy('name', 'asc');
                 break;
         }
 
