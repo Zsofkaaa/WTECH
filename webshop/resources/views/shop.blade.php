@@ -38,7 +38,6 @@
                         </ul>
                     </div>
 
-
                     <div class="dropdown">
                         <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             Filter
@@ -57,12 +56,12 @@
                                 </div>
 
                                 <div class="mb-2">
-                                    <label for="vekova_kategoria" class="form-label">Veková kategória:</label>
+                                    <label for="vekova_kategoria" class="form-label">Maximálna veková kategória:</label>
                                     <input type="number" class="form-control" name="vekova_kategoria" id="vekova_kategoria" value="{{ request('vekova_kategoria') }}" min="0">
                                 </div>
 
                                 <div class="mb-2">
-                                    <label for="hracov" class="form-label">Počet hráčov:</label>
+                                    <label for="hracov" class="form-label">Minimálny počet hráčov:</label>
                                     <input type="number" class="form-control" name="hracov" id="hracov" value="{{ request('hracov') }}" min="0">
                                 </div>
 
