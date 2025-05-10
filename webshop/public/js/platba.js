@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.selectPayment = selectPayment;
 
-    //automatikus szokoz  a hosszu kartyaszamnem
+
     cardNumber.addEventListener('input', (e) => {
         let value = cardNumber.value.replace(/\D/g, ''); // ami nem szam eltavolitja
         value = value.replace(/(.{4})(?=.)/g, '$1 ');
@@ -66,9 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function submitPayment() {
-        // You should collect payment details here if needed
-
-        // Submit to your order placement endpoint
         fetch('/place-order', {
             method: 'POST',
             headers: {
@@ -76,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
             },
             body: JSON.stringify({
-                // Include any payment details if needed
             })
         })
         .then(response => {
