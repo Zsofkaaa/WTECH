@@ -134,3 +134,13 @@ body {
     padding: 8px !important;
     font-size: 0.9rem;
 }
+@media (max-width: 600px) {
+    .carousel-view {
+        max-width: 170px;
+    }
+}
+@media (min-width: 601px) and (max-width: 1024px) {
+    .carousel-view {
+        max-width: calc(2 * 170px);
+    }
+}
