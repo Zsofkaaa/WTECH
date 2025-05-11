@@ -77,6 +77,8 @@ class AuthController extends Controller
 
         auth()->logout();
 
+        \DB::table('sessions')->where('user_id', $user->id)->delete();
+
         $user->delete();
 
         return redirect('/')->with('success', 'Váš účet bol úspešne vymazaný.');
